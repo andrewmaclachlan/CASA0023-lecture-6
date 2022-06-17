@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Remotely Sensing Cities and Environments</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andy MacLachlan" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
+    <script src="libs/js-cookie/js.cookie.js"></script>
+    <script src="libs/peerjs/peerjs.min.js"></script>
+    <script src="libs/tiny.toast/toast.min.js"></script>
+    <link href="libs/xaringanExtra-broadcast/broadcast.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-broadcast/broadcast.js"></script>
+    <script src="libs/freezeframe/freezeframe.min.js"></script>
+    <script src="libs/xaringanExtra-freezeframe/freezeframe-init.js"></script>
+    <script id="xaringanExtra-freezeframe-options" type="application/json">{"selector":"img[src$=\"gif\"]","trigger":"click","overlay":false,"responsive":true,"warnings":true}</script>
+    <script src="libs/fabric/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":true,"autoSearch":true}) })</script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x1b39eb99c234dfdb52e79f285306a1e","expires":1}</script>
+    <script src="libs/himalaya/himalaya.js"></script>
+    <link href="libs/editable/editable.css" rel="stylesheet" />
+    <script src="libs/editable/editable.js"></script>
+    <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-progressBar/progress-bar.js"></script>
+    <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
+    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
+    </head>
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+class: inverse, center, title-slide, middle
+
+&lt;style&gt;
+.title-slide .remark-slide-number {
+  display: none;
+}
+&lt;/style&gt;
+
+
+
+# Remotely Sensing Cities and Environments
+
+### Lecture 5: Classification
+
+### 02/02/2022 (updated: 17/06/2022)
+
+<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>[a.maclachlan@ucl.ac.uk](mailto:a.maclachlan@ucl.ac.uk)
+<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>[andymaclachlan](https://twitter.com/andymaclachlan)
+<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>[andrewmaclachlan](https://github.com/andrewmaclachlan)
+<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0z"/></svg>[Centre for Advanced Spatial Analysis, UCL](https://www.ucl.ac.uk/bartlett/casa/)
+
+&lt;a href="https://github.com/andrewmaclachlan" class="github-corner" aria-label="View source on GitHub"&gt;&lt;svg width="80" height="80" viewBox="0 0 250 250" style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"&gt;&lt;path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"&gt;&lt;/path&gt;&lt;path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"&gt;&lt;/path&gt;&lt;path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;&lt;style&gt;.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}&lt;/style&gt;
+
+---
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+# How to use the lectures
+
+
+
+- Slides are made with [xaringan](https://slides.yihui.org/xaringan/#1)
+
+- <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg> In the bottom left there is a search tool which will search all content of presentation
+
+- Control + F will also search 
+
+- Press enter to move to the next result 
+
+- <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg> In the top right let's you draw on the slides, although these aren't saved.
+
+- Pressing the letter `o` (for overview) will allow you to see an overview of the whole presentation and go to a slide
+
+- Alternatively just typing the slide number e.g. 10 on the website will take you to that slide
+
+- Pressing alt+F will fit the slide to the screen, this is useful if you have resized the window and have another open - side by side. 
+
+<div>
+<style type="text/css">.xaringan-extra-logo {
+width: 110px;
+height: 128px;
+z-index: 0;
+background-image: url(img/casa_logo.jpg);
+background-size: contain;
+background-repeat: no-repeat;
+position: absolute;
+top:1em;right:1em;
+}
+</style>
+<script>(function () {
+  let tries = 0
+  function addLogo () {
+    if (typeof slideshow === 'undefined') {
+      tries += 1
+      if (tries < 10) {
+        setTimeout(addLogo, 100)
+      }
+    } else {
+      document.querySelectorAll('.remark-slide-content:not(.title-slide):not(.inverse):not(.hide_logo)')
+        .forEach(function (slide) {
+          const logo = document.createElement('div')
+          logo.classList = 'xaringan-extra-logo'
+          logo.href = null
+          slide.appendChild(logo)
+        })
+    }
+  }
+  document.addEventListener('DOMContentLoaded', addLogo)
+})()</script>
+</div>
+---
+# Lecture outline
+
+.pull-left[
+
+### Part 1: Example applcations
+
+
+
+### Part 2: Policy challenges
+
+]
+
+.pull-right[
+&lt;img src="img/satellite.png" width="100%" /&gt;
+.small[Source:[Original from the British Library. Digitally enhanced by rawpixel.](https://www.rawpixel.com/image/571789/solar-generator-vintage-style)
+]]
+
+---
+class: inverse, center, middle
+
+# Before we can explore policy we really need to look at what remotely sensed data can provide answers to...
+
+---
+
+class: inverse, center, middle
+
+# So...a brief overview...but of course this depends on the data you are using
+
+---
+
+# Data from sensors
+
+Depends on a the combination of spectral bands,  resolutions + cost.
+
+.pull-left[
+
+* Multi-temporal land cover (or land use) mapping 
+
+* Spectral signatures / libraries* 
+
+* Change detection - e.g. urban or forest 
+
+* Vegetation stress - illegal logging 
+
+* Precipitation 
+
+* Elevation models (or point data) - such as LiDAR
+
+* Temperature 
+
+* Night time lights (urban development)
+]
+
+.pull-right[
+
+* Forest fire monitoring / predicting / "hot spot" detecting 
+
+* Pollution monitoring 
+
+* Drought indices
+
+* Informal housing detection
+
+* Water level data - monitoring 
+
+* Building or network outline (polygon / line) extraction
+
+* Environmental monitoring (e.g. Aral Sea)
+
+* Estimations of resources - forest, water, snow, ice, green space
+]
+
+---
+# Different wavelengths show us different things...
+
+.pull-left[
+&lt;img src="img/spectral_table.PNG" width="100%" /&gt;
+.small[Source:[USGS](https://www.usgs.gov/faqs/what-are-best-landsat-spectral-bands-use-my-research)
+]]
+
+
+.pull-right[
+&lt;img src="img/spectral_viewer.PNG" width="100%" /&gt;
+.small[Source:[USGS](https://landsat.usgs.gov/spectral-characteristics-viewer)
+]]
+
+---
+# Urban expansion 
+
+**Sensor**
+
+* Landsat
+
+&lt;img src="img/urban_area.png" width="35%" style="display: block; margin: auto;" /&gt;
+.small[Figure 2. Urban expansion within the Perth Metropolitan Region (PMR) between 1990 and 2015. Vast urban growth has been observed in PMR with graduating colours exhibiting outward expansion (a); (b) and (c) exhibit static snapshots of urban extent from 2000 (b) and 2015 (c); whilst (d) depicts percentage of urban change per subnational administrative boundary (Local Government Area; LGA).Source:[MacLachlan et al. 2017](https://www.mdpi.com/2073-445X/6/1/9)
+]
+
+---
+
+# Air pollution and LULC
+
+**Sensors**
+
+* Sentinel-3 Sea and Land Surface Temperature
+* Sentinel-5 Precursor Major Air Pollutants
+
+LULC transformation on air pollution, increase MAP (Major Air Pollutants) and LST 
+
+* Used regression...
+
+* Honeycombing - hex grids for different sensor data
+
+&lt;img src="img/LST_honeycombing.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+.small[Fig. 2. The classified honeycomb dataset for LST, PM₂.₅, SO₂, NO₂, CO, and O₃..Source:[Fuldalu and Alta, 2021](https://www.sciencedirect.com/science/article/pii/S2212095521001887?casa_token=0kyJ1dZmkm0AAAAA:syu0WnpPpsCKiY6PiBfzkf2epGa5uldthCpOt1Hey9_pmOF_uel1WpuYECTvF0jr3uzcRCrbd5k#f0005)
+]
+
+---
+
+class: inverse, center, middle
+
+# Land Use and (?) Land Cover (LULC) 
+
+---
+
+# Urban green spaces
+
+**Sensors / data**
+.pull-left[
+* Landsat (medium res 17%)
+* Sentinel]
+
+.pull-right[
+* LiDAR $
+* High spatial resolution (38%) $
+* High + medium res = 9%
+]
+
+Studies
+
+  * Accessibility to urban green spaces - usual kind of stuff
+  
+  * Also, now types of vegetation - DEM, elevation models and relationship to well being and health 
+  
+  * Google street view! - sky view factor and iTree
+  
+  * Google Earth Engine - Compare health benefits in relation to green space over 25 cities
+
+* Vegetation health - targeted intervention 
+
+* Landscape indexes - mean patch size, patch density and edge density 
+
+.small[Remote sensing of urban green spaces: A review. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)
+]
+---
+
+# Disaster response / preparedness  
+
+**Sensor**
+
+Sentinel-2 spectral imagery 
+
+  * Image difference (post event - pre-event)
+  * View-shed analysis (building outlines / DEM)
+  
+&lt;img src="img/spectral_sig_diff.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.small[Building a 3D Model of the Beirut Explosion. Source:[Ollie Ballinger](https://oballinger.github.io/beirut-3D-model/)
+]
+
+---
+
+# Disaster response / preparedness 2
+
+&lt;img src="img/GIF_1.gif" width="50%" style="display: block; margin: auto;" /&gt;
+
+.small[Building a 3D Model of the Beirut Explosion. Source:[Ollie Ballinger](https://oballinger.github.io/beirut-3D-model/)
+]
+---
+
+class: inverse, center, middle
+
+# Synthetic Aperture Radar (SAR)
+
+---
+
+# SAR floods
+
+**Sensor**
+
+* Sentinel-1 SAR 
+
+ENSO phases but this is from Australian La Niña 2022
+  * trade winds from south america intensity
+  * draw up cool deep waters and increase thermocline 
+  * temp difference increases, walker circulation intensifies - feedback loop
+  * more cloud + more rain + cyclones in West Pacific 
+
+&lt;img src="img/SAR1.jpg" width="35%" style="display: block; margin: auto;" /&gt;
+
+.small[Eastern Australia Floods. Source:[brockmann-consult](https://www.brockmann-consult.de/eastern-australia-floods/)
+]
+
+---
+
+# SAR background
+
+Synthetic Aperture Radar:
+  * Active sensors
+  * Have surface texture data
+  * See through weather and clouds 
+  * Different wavelengths - different applications
+  
+&lt;img src="img/SAR_bands.PNG" width="50%" style="display: block; margin: auto;" /&gt;
+
+.small[What is Synthetic Aperture Radar?. Source:[NASA Earth Data](https://earthdata.nasa.gov/learn/backgrounders/what-is-sar)
+]
+  
+---
+
+# SAR background 2
+
+  * Also different ploarizations - orientation of the plane in which EMR waves transmitted..
+  
+  &gt; Polarization refers to the orientation of the plane in which the transmitted electromagnetic wave oscillates. While the orientation can occur at any angle, SAR sensors typically transmit linearly polarized. The horizontal polarization is indicated by the letter H, and the vertical polarization is indicated by V.
+  
+&lt;img src="img/SARPolarization.jpg" width="75%" style="display: block; margin: auto;" /&gt;
+
+.small[What is Synthetic Aperture Radar?. Source:[NASA Earth Data](https://earthdata.nasa.gov/learn/backgrounders/what-is-sar)
+]
+
+---
+
+# SAR image
+
+&lt;img src="img/SAR.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+Paper also goes through some correction methods that should be familiar! 
+
+.small[Urban objects detection from C-band synthetic aperture radar (SAR) satellite images through simulating filter properties. Source:[Deepak Kumar, 2021](https://www.nature.com/articles/s41598-021-85121-9)
+]
+
+---
+# SAR image 2
+
+"multitemporal colour composite SAR image, rice growing areas in the Mekong River delta, Vietnam 1996." 
+
+
+.pull-left[
+"Three SAR images acquired by the ERS satellite during 5 May, 9 June and 14 July in 1996 are assigned to the red, green and blue channels respectively for display. The colourful areas are the rice growing areas, where the landcovers change rapidly during the rice season. The greyish linear features are the more permanent trees lining the canals. The grey patch near the bottom of the image is wetland forest. The two towns appear as bright white spots in this image. An area of depression flooded with water during this season is visible as a dark region."
+
+]
+
+.pull-right[
+
+&lt;img src="img/multitemporal colour composite SAR image.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.small[SAR Images. Source:[CRISP](https://crisp.nus.edu.sg/~research/tutorial/sar_int.htm)
+]
+
+---
+
+# SAR background 3
+
+Scattering can change based on wavelength 
+
+Further penetration then the volume scattering will change
+
+&lt;img src="img/SARtree_figure2.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+
+.small[What is Synthetic Aperture Radar?. Source:[NASA Earth Data](https://earthdata.nasa.gov/learn/backgrounders/what-is-sar)
+]
+
+
+---
+# SAR background 4
+
+Some terms:   
+
+&gt; Backscatter is the portion of the outgoing radar signal that the target redirects directly back towards the radar antenna
+
+The higher the backscattered intensity = rougher the surface. It is "unitless"
+
+Can be converted to "backscatter coefficient, or sigma nought", measured in decibel (dB) units = normalised measure of the radar return from a distributed target 
+
+If the signal is from backscatter is not desired = "clutter"
+
+* Has been used in urban monitoring BUT...
+
+  * Corner reflections in urban environments 
+  * Shadowing - building behind another not imaged 
+  * Speckle - grainy, from scattering on ground - "salt and pepper"
+  
+.small[Source:[NASA Earth Data](https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-1-sar/definitions#:~:text=Backscatter%20is%20the%20portion%20of,by%20which%20backscatter%20is%20formed.)
+]
+
+.small[Source:[Urban Area Delineation Using InSAR Products](https://webapps.itc.utwente.nl/librarywww/papers/msc_2002/gfm/luhega.pdf)
+]
+
+---
+
+# Me on SAR
+
+&gt; Although SAR images over urban areas provide low quality images due to problems associated with radar imaging in such an environment (i.e. multiple bouncing, layover and shadowing), SAR texture measures can provide valuable information in discerning urban areas (Dell’Acqua et al., 2003; Zhu et al., 2012). Isolated scattering of residential areas and crowded backscatters of inner city high density areas permit classification refinement, thus textural measures such as those descried within the spatial domain can aid identification of alternative urban forms (Zhu et al., 2012). 
+
+&gt;However, the lack of freely available SAR data that temporally coincides with other satellite imagery (e.g. Landsat) frequently precludes extensive use
+
+
+---
+
+class: inverse, center, middle
+
+# To use SAR or not to use SAR...that is the question...
+
+---
+
+# InSAR
+
+Interferometry Synthetic Aperture Radar (InSAR)
+ * Take two RADAR observations of the target (e.g. the ground)
+ * The two 
+ * Use the phase difference 
+ * Phase = 
+  &gt; "total number of cycles of the wave at any given distance from the transmitter, including the fractional part"
+
+* Phase difference - SUBTRACT the values (measured phase values) at two different measurement points
+
+* Differential distance depends on the height of the terrain (topography)
+
+* Used for creating DEMs
+
+* Monitoring displacement of ground - earthquakes etc
+
+.small[INTERFEROMETRY EXPLAINED - MORE DETAIL. Source:[NASA SRTM](https://www2.jpl.nasa.gov/srtm/instrumentinterfmore.html)
+]
+  
+
+---
+# InSAR 2
+
+Key terms
+
+* Coherence Map
+
+  &gt;  Coherence is defined as the degree of similarity of backscattering response (or reflection characteristic of as measured by the SAR sensor) between corresponding ground cells in both SAR image of an InSAR pair. 
+
+* Differential Interferometry Synthetic Aperture Radar (DInSAR)
+  
+&gt; "quantification of the ground displacement that occurred between the two acquisitions can be achieved" through a "differential interferogram"
+
+.small[Source:[Michel Gay](http://www.permanet-alpinespace.eu/archive/pdf/WP6_1_dinsar.pdf)
+]
+
+---
+# InSAR 3
+
+
+&lt;img src="img/interf_fig4.gif" width="100%" style="display: block; margin: auto;" /&gt;
+
+.small[INTERFEROMETRY EXPLAINED - MORE DETAIL. Source:[NASA SRTM](https://www2.jpl.nasa.gov/srtm/instrumentinterfmore.html)
+]
+
+---
+# SAR applications
+
+SAR applications, an emerging trend: https://www.mdpi.com/journal/remotesensing/special_issues/Urban_SAR 
+
+* Damage detection: https://www.sciencedirect.com/science/article/pii/S0924271621000010?casa_token=Peuv4YfQjsEAAAAA:wAdc-R2tEjK7L4maY6ZcOio3YyIZPnb7HgqXi5SQZAeIoYq8bApu9iA6H-281attgj1dwQ-IPz8 
+
+* Urban area mapping: https://www.sciencedirect.com/science/article/pii/S0034425721002352?casa_token=6kKdHHJ_GZ4AAAAA:LDl85LIgl6O8G_NNSgxfBgcGw7vpRrS0JAd5STW5obGnGDuO2l0RmkdzzLqLEbqNbO0MSzdhFPU
+
+* Urban flooding (lower backscatter coefficient): https://www.mdpi.com/2071-1050/12/14/5784 
+
+* Landslides
+
+* Earthquakes
+
+* Data fusion* / DEM creation
+
+---
+
+# Monitoring forests + illegal logging 
+
+**Sensor**
+
+* Landsat (2000 to 2012)
+
+Monitoring forest loss and illegal logging 
+
+* Pre-processing
+
+&gt; "Landsat pre-processing steps included: (i) image resampling, (ii) conversion of raw
+digital values (DN) to top of atmosphere (TOA) reflectance, (iii) cloud/shadow/water
+screening and quality assessment (QA), and (iv) image normalization"
+
+&gt; The stack of QA layers was used to create a perpixel set of cloud-free image observations which in turn was employed to calculate timeseries spectral metrics.
+
+---
+
+# Monitoring forests + illegal logging 2
+
+* Creating metrics
+
+&gt; Metrics represent a generic feature space that facilitates regionalscale mapping and have been used extensively with MODIS and AVHRR data
+
+&gt; (i) reflectance values representing maximum, minimum and selected percentile values 
+  (ii) mean reflectance values for observations between selected percentiles
+  (iii) slope of linear regression of band reflectance value versus
+image date.
+
+In support of this reference is given to [Hansen et al. 2010](https://www.pnas.org/doi/epdf/10.1073/pnas.0912668107)...supplementary material...
+
+&gt; The time-sequential MODIS 32-dayinputs were transformed to annual metrics to produce a more generalized feature space
+
+---
+# Monitoring forests + illegal logging 3
+
+&gt; "a more generalized feature space"
+
+* Feature space = scattergram of two bands (or things that have been made into bands)
+
+* Can be used for very basic classification - selecting the values that represent land cover
+
+.pull-left[
+&lt;img src="img/Multi_Hyper-spectral_Image_feature_space.svg" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Feature space. Source:[Wikimedia commons 2022](https://commons.wikimedia.org/wiki/File:Multi_Hyper-spectral_Image_feature_space.svg)
+]
+]
+
+.pull-right[
+&lt;img src="img/Spectral-curves-scatter-plot.png" width="80%" style="display: block; margin: auto;" /&gt;
+.small[Spectral curves on the scatter plot. Source:[50northspatial](http://www.50northspatial.org/n-dimensional-spectral-feature-space-envi/)
+]
+]
+---
+# Monitoring forests + illegal logging 4
+
+* Training data (in supervised machine learning)
+
+&gt; Training data to relate to the Landsat metrics were derived from image interpretation methods, including mapping of crown/no crown categories using very high spatial resolution data such as Quickbird imagery, existing percent tree cover layers derived from Landsat data (29), and global MODIS percent tree cover (30), rescaled using the higher spatial resolution percent tree cover data sets
+
+&lt;img src="img/training_data.png" width="80%" style="display: block; margin: auto;" /&gt;
+.small[REMAP method. Source:[UN-SPIDER](https://www.un-spider.org/news-and-events/news/new-online-remote-sensing-application-land-cover-classification-and-monitoring)
+]
+
+---
+
+# Monitoring forests + illegal logging 5
+
+* Classification (supervised or unsupervised)
+
+&gt; Decision trees are hierarchical classifiers that predict class membership by recursively partitioning a data set into more homogeneous or less varying subsets, referred to as nodes
+
+&lt;img src="img/Hansen_forest_change.jpeg" width="50%" style="display: block; margin: auto;" /&gt;
+
+.small[FIG. 2 Regional subsets of 2000 tree cover and 2000 to 2012 forest loss and gain.(A) Paraguay, centered at 21.9°S, 59.8°W; (B) Indonesia, centered at 0.4°S, 101.5°E; (C) the United States, centered at 33.8°N, 93.3°W; and (D) Russia, centered at 62.1°N, 123.4°E. Source:[Hansen et al. 2013](https://www.science.org/doi/10.1126/science.1244693)
+]
+
+Used in Brazil to [target illegal logging]( https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/) 
+
+---
+# Monitoring forests + illegal logging 6
+
+&gt; Decision trees are hierarchical classifiers that predict class membership by recursively partitioning a data set into more homogeneous or less varying subsets, referred to as nodes
+
+* Decision trees are part of a random forest classier
+
+* Take something complex and force into many decisions = if-else conditions or also called divide and conquer.
+
+* Often requires hyperparameters to train the model (or  control the learning process) - e.g. the choices we've made in the past...sort of...
+  * DBSCAN (radius of points, Epsilon or MinPts - to make a cluster)
+  * Spatial weight matrix (type and then weight)
+
+* Split the data into more and more homogeneous subsets (filtering!) this can be limited through
+  * pre-pruning - set a number of iterations before
+  * post-pruning - reduce groups afterwards based on accuracy.
+
+https://www.sciencedirect.com/science/article/abs/pii/S0924271616000265 
+
+https://lgatto.github.io/IntroMachineLearningWithR/unsupervised-learning.html#k-means-clustering 
+
+---
+# Forest fires
+
+* Dates back to the most cited paper on the topic 
+    - "Application of remote sensing and geographic information systems to forest fire hazard mapping", Chuvieco and Congalton 1989. 
+
+.pull-left[  
+  Used:
+  * **Sensor** Landsat TM 1984
+  * vegetation, elevation, slope, aspect and road/ house proxmity = fire hazard map compared to burned map from Landsat
+  * Did a weighted overlay of the layers - giving hazard value of 0 to 255, some layers had assigned values (e.g. aspect of 90-180 a value of 0)
+  * Vegetation was from a classified Landsat TM image - classified 16 categories 
+  * No accuracy assessment
+  * I assume the manually delineated the burned area pixels 
+]
+.pull-right[
+&lt;img src="img/hazard.png" width="100%" /&gt;
+.small[Source:[Chuvieco and Congalton 1989](https://reader.elsevier.com/reader/sd/pii/0034425789900230?token=3F5F9030CFCBBA7544083535303388C8CC1F2D5496F0FFBC273C3673EBFED7B66B2FCAD3EE3B7A6441301FDDAAC7E659&amp;originRegion=eu-west-1&amp;originCreation=20220527153008)
+]]
+
+---
+
+# Forest fires 2
+
+Whilst somewhat more complex with additional variables and analysis this approach is still being used...e.g. 
+
+.pull-left[
+
+9 parameters in creating a fire action plan for Ecuador...
+
+Fire severity - **Landsat-8 OLI** 2014 and 2020
+
+`\(dNDVI = pre NDVI − post NDVI\)` 
+
+`\(dNBR = NBRpre − NBRpost\)` (similar to NDVI)
+
+Verified from field visits 
+
+Call this a severity model? but kept the indices separate
+
+Used this to designate safe escape routes..
+]
+
+.pull-right[
+&lt;img src="img/action_plan.png" width="80%" /&gt;
+.small[Source:[Morante-Carballo et al. 2022](https://www.mdpi.com/2072-4292/14/8/1783)
+]]
+
+---
+class: inverse, center, middle
+
+# Which variables used remote sensing?
+
+--
+
+## Only the severity which wasn't even overlaid directly
+
+--
+
+## The study was somewhat confusing with a focus on severity (the aim) which then changed to a fire action plan that didn't show severity as a factor
+
+--
+
+## No method was given for the action plan development
+
+---
+
+class: inverse, center, middle
+
+# The key is *usually* **combining the remote sensing data** with GIS or other datasets to answer questions
+
+--
+
+# The remotely sensed data is consistent over days, months and years
+
+---
+class: inverse, center, middle
+
+
+# Often these papers don't: 
+## demonstrate the link to population / people
+## show how policy can be informed by the outcomes
+
+---
+
+class: inverse, center, middle
+
+# For example:
+## Where should iniatives be targetd for reducing air pollution
+## What areas / population are most at risk from forest fires or where should remeidation be targeted 
+## How can illegal monitoring be most effectively stopped
+---
+class: inverse, center, middle
+
+# We will explore methods in the next few weeks
+
+# But first we will explore policy to understand where remote sensing data can be applied.
+
+---
+# Global policy documents
+
+* New Urban Agenda = standards and principles for planning, construction, development, management and urban improvement
+
+An example of commitments... Environmentally sustainable and resilient urban development subsection
+
+
+.panelset[
+
+.panel[.panel-name[point 64]
+
+&gt; We also recognize that urban centres worldwide, especially in developing countries, often have characteristics that make them and their inhabitants especially vulnerable to the adverse impacts of climate change and other natural and human-made hazards, 
+
+&gt; **including earthquakes, extreme weather events, flooding, subsidence, storms, including dust and sand storms, heatwaves, water scarcity, droughts, water and air pollution, vector-borne diseases and sea level rise,**
+
+&gt; which particularly affect coastal areas, delta regions and small island developing States, among others.
+]
+
+.panel[.panel-name[point 65]
+
+&gt; We commit ourselves to facilitating the 
+
+&gt; **sustainable management of natural resources in cities and human settlements in a manner that protects and improves the urban ecosystem and environmental services, reduces greenhouse gas emissions and air pollution and promotes disaster risk reduction and management**, 
+
+&gt;by supporting the development of disaster risk reduction strategies and periodical assessments of disaster risk caused by natural and human-made hazards, including standards for risk levels..
+]
+
+.panel[.panel-name[point 67]
+
+  &gt;We commit ourselves to promoting the creation and maintenance of well-connected and well distributed networks of 
+  
+  &gt; **open, multipurpose, safe, inclusive, accessible, green and quality public spaces, to improving the resilience of cities to disasters and climate change, including floods, drought risks and heat waves**
+  
+  &gt;  to improving food security and nutrition, physical and mental health, and household and ambient air quality, to reducing noise and promoting attractive and liveable cities, human settlements and urban landscapes and to prioritizing the conservation of endemic
+species. 
+
+]
+]
+
+  
+---
+# Global policy documents
+
+* Sustainable Development Goals (SDG) = targets with measurable indicators for monitoring 
+
+* Full indicators and notes on [SDG indicators](https://unstats.un.org/sdgs/metadata/?Text=&amp;Goal=11&amp;Target=)
+
+.panelset[
+.panel[.panel-name[Goal 11]
+
+  * Goal 11: Make cities and human settlements inclusive, safe, resilient and sustainable 
+]
+
+.panel[.panel-name[Target 11.5]
+
+* Target 11.5: By 2030, significantly reduce the number of deaths and the number of people affected and substantially decrease the direct economic losses relative to global gross domestic product caused by disasters, including water-related disasters, with a focus on protecting the poor and people in vulnerable situations
+
+]
+
+.panel[.panel-name[Monitoring 11.5]
+* 11.5.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population
+
+*  11.5.2 Direct economic loss attributed to disasters in relation to global gross domestic product (GDP)
+
+* 11.5.3 (a) Damage to critical infrastructure and (b) number of disruptions to basic services, attributed to disasters
+]
+
+.panel[.panel-name[Data 11.5]
+* 11.5.1 (and .2) Data provider at national level is appointed Sendai Framework Focal Points. In most countries disaster **data are collected by line ministries and national disaster loss databases are established and managed by special purpose agencies including national disaster management agencies, civil protection agencies, and meteorological agencies**. The Sendai Framework Focal Points in each country are responsible of data reporting through the Sendai Framework Monitoring System.
+
+* 11.5.3 National disaster loss database, reported to UNISDR...**Not every country has a comparable national disaster loss database that is consistent with these guidelines** (although current coverage exceeds 89 countries). Therefore, by 2020, it is expected that all countries will build/adjust national disaster loss databases according to the recommendations and guidelines by the OEIWG.
+]
+]
+
+---
+class: inverse, center, middle
+
+# Positives and negatives with this guidance? 
+
+???
+
+All about monitoring, doesn't say how to do it...but this is changing
+
+---
+# Global policy documents
+
+Some new additions that have included spatial data...e.g...
+
+.panelset[
+.panel[.panel-name[Target 11.7]
+
+By 2030, provide universal access to safe, inclusive and accessible, green and public spaces, in particular for women and children, older persons and persons with disabilities
+
+* Indicator 11.7.1: Average share of the built-up area of cities that is open space for public use for all, by sex, age and persons with disabilities
+
+&gt; Satellite imagery (open sources), documentation outlining publicly owned land and community-based maps are the main sources of data.
+
+But...
+
+&gt; High resolution satellite imagery or Google Earth imagery can be used in this analysis. Open data sources such as OpenStreetMap (OSM) have some polygon data on open spaces in many cities
+
+]
+
+.panel[.panel-name[Target 11.6]
+
+By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management
+
+* Indicator 11.6.2: Annual mean levels of fine particulate matter (e.g. PM2.5 and PM10) in cities (population weighted)
+
+&gt; Sources of data include ground measurements from monitoring networks, collected for 3,000 cities and localities (WHO 2016) around the world, satellite remote sensing, population estimates...
+
+&gt; estimated with improved modelling using data integration from satellite remote sensing, population estimates, topography and ground measurements (WHO, 2016a; Shaddick et al, 2016)
+
+* The paper by Shaddick is hard to follow with no code.
+
+]
+.panel[.panel-name[Reflections]
+
+These are two examples but comment on the complexity of the approaches..
+
+* Who are they targeted at, what end user
+* Who could replicate them
+* Are they useful - how could the results be used
+
+]
+]
+---
+# Metropolitan policy documents
+
+Under the theme of disaster (flooding, landslides, drought, heatwaves etc)
+
+.panelset[
+.panel[.panel-name[London]
+
+**Increasing efficiency and resilience**
+
+* These environmental threats are real and present, and London must be prepared for them. London’s homes and infrastructure must be protected against the increasing likelihood of heatwaves, and developments must plan for a more integrated approach to water management, while minimising flood risk.
+
+
+**Policy SI 12 Flood risk management **
+
+* Development Plans should use the Mayor’s Regional Flood Risk Appraisal and their Strategic Flood Risk Assessment as well as Local Flood Risk Management Strategies, where necessary, to identify areas where particular and cumulative flood risk issues exist and develop actions and policy
+approaches aimed at reducing these risks.
+
+
+.panel[.panel-name[OneNYC 2050]
+
+* References the sustainable development goals
+* Has a hazards matrix
+
+&lt;img src="img/NYC.png" width="40%" style="display: block; margin: auto;" /&gt;
+.small[Source:[oneNYC](https://1w3f31pzvdm485dou3dppkcq-wpengine.netdna-ssl.com/wp-content/uploads/2019/11/OneNYC-2050-A-Livable-Climate-11.7.pdf)
+]]
+]
+.panel[.panel-name[OneNYC 2050 2]
+
+
+* Discusses coastal resiliency as an example of rising sea levels and flooding...BUT?
+
+.pull-left[
+&lt;img src="img/floods1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="img/floods2.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.small[Source:[oneNYC](https://1w3f31pzvdm485dou3dppkcq-wpengine.netdna-ssl.com/wp-content/uploads/2019/11/OneNYC-2050-A-Livable-Climate-11.7.pdf)
+]]
+
+.panel[.panel-name[Cape Town]
+
+[Cape Town Municipal Spatial Development Framework](https://www.capetown.gov.za/work%20and%20business/planning-portal/regulations-and-legislations/cape-town-spatial-development-framework#section-docs)
+
+* "worst recorded drought in the city’s history, is a stark reminder that all cities will need to become more robust, resilient and efficient"
+
+* "The Cape Town Spatial Development Framework (CTSDF) was approved in May 2012 and established a long-term spatial vision and policy framework for the City after extensive technical drafting and public participation."
+
+* "Careful management of development to avoid developing in high flood risk areas"
+
+States policies and their requirements ...BUT...
+
+
+]
+
+.panel[.panel-name[Ahmedabad]
+
+* 2010 severe heatwave leading to 1,344 additional deaths
+
+* [2016 Heat Action Plan](https://www.nrdc.org/sites/default/files/ahmedabad-heat-action-plan-2016.pdf):
+  * Awareness and outreach
+  * Early warning system
+  * Capacity of health care professionals
+  * Reduce heat exposure and promote adaptive mesaures ...and mapping high risk areas, although mapping was removed later in the document (page 11)
+
+* Doesn't seem to appear in the publications, although spatial analysis is listed as a long term opportunity in the second paper: 
+
+  - [Development and Implementation of South Asia’s First Heat-Health Action Plan in Ahmedabad (Gujarat, India)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4024996/)
+  - [Rising Temperatures, Deadly Threat:
+Recommendations for Ahmedabad’s Government Officials](https://www.nrdc.org/sites/default/files/india-heat-government-officials-IB.pdf)
+
+]
+]
+
+
+---
+
+# Local policy documents
+
+In most of the previous examples the documents were created by the metropolitan government:
+  * Greater London Authority 
+  * Amdavad Municipal Corporation
+  * City of New York
+
+Usually these are considered an upper tier
+
+They set the strategic plan for the city and may have other responsibilities such as fire, policing, transport and development guidelines.
+
+Lower tier government then carries out or adheres to these goals, for example....
+
+* The Western Australian Planning Commission sets the statutory planning guidance that is carried out by local cities, such as the City of Perth and City of Fremantle.
+
+* The Greater London Authority set the strategic goals for London with London Boroughs providing local services. 
+
+---
+
+# Local policy documents 2
+
+**BUT** there are variations to this rule..
+
+.panelset[
+.panel[.panel-name[City of Cape Town]
+
+* The City of Cape Town is a metropolitan municipality or Category A municipality, there is no local municipality below it.
+
+* However, **above** the City of Cape Town is the Provincial government that is responsible for topics such as: agriculture, education, health and public housing. As such the City sets it's own development plan and then implements it (whilst adhering to relevant Provincial topics).
+
+]
+
+.panel[.panel-name[New York]
+
+
+* City of New York is responsible for public education, correctional institutions, public safety, recreational facilities, sanitation, water supply, and welfare services
+
+* 5 Boroughs under it act as spokespeople
+
+* City Council has 51 members from districts of about 157,000 
+* New York City is responsible for setting and enacting the policy. State government is above it.
+]
+]
+---
+
+# Task 1
+
+For the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. 
+
+For the practical session this week **come** prepared **to talk** about the following:
+
+- Search for one metropolitan policy challenge (any city in the World) that could be solved by incorporating remotely sensed data
+
+- Identify and evaluate a remotely sensed data set that could used to assist with contributing to the policy goal
+
+-  Demonstrate how this links to global agendas / goals
+
+- Explain how it advances current local, national or global approaches.
+
+Cities will have a diverse range of documentation available...
+
+---
+# Task 2
+
+Following the practical and subsequent discussion write up your case study city in three paragraphs, you should:
+
+* Detail the relevant policy that can be assisted with remotely sensed data
+* Evaluate how remotely sensed data set(s) could used to assist with contributing to the policy goal
+* Place it within local / global agendas and current approaches
+* Cite the relevant policy and where appropriate literature.
+
+Should you struggle to find current approaches within your city explore other cities discussed within the practical. 
+
+---
+
+https://link.springer.com/article/10.1007/s41207-016-0007-4
+
+https://www.sciencedirect.com/journal/international-journal-of-applied-earth-observation-and-geoinformation/vol/108/suppl/C 
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
