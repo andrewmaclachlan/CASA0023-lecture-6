@@ -110,11 +110,10 @@ xaringanExtra::use_logo(
 
 .pull-left[
 
-### Part 1: Example applcations
+### Part 1: Review of how classified data is used
 
 
-
-### Part 2: Policy challenges
+### Part 2: How to classify remotely sensed data
 
 ]
 
@@ -128,75 +127,8 @@ knitr::include_graphics('img/satellite.png')
 ---
 class: inverse, center, middle
 
-# Before we can explore policy we really need to look at what remotely sensed data can provide answers to...
+# Let's look back at last week and see how some studies used classfied data
 
----
-
-class: inverse, center, middle
-
-# So...a brief overview...but of course this depends on the data you are using
-
----
-
-# Data from sensors
-
-Depends on a the combination of spectral bands,  resolutions + cost.
-
-.pull-left[
-
-* Multi-temporal land cover (or land use) mapping 
-
-* Spectral signatures / libraries* 
-
-* Change detection - e.g. urban or forest 
-
-* Vegetation stress - illegal logging 
-
-* Precipitation 
-
-* Elevation models (or point data) - such as LiDAR
-
-* Temperature 
-
-* Night time lights (urban development)
-]
-
-.pull-right[
-
-* Forest fire monitoring / predicting / "hot spot" detecting 
-
-* Pollution monitoring 
-
-* Drought indices
-
-* Informal housing detection
-
-* Water level data - monitoring 
-
-* Building or network outline (polygon / line) extraction
-
-* Environmental monitoring (e.g. Aral Sea)
-
-* Estimations of resources - forest, water, snow, ice, green space
-]
-
----
-# Different wavelengths show us different things...
-
-.pull-left[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('img/spectral_table.PNG')
-```
-.small[Source:[USGS](https://www.usgs.gov/faqs/what-are-best-landsat-spectral-bands-use-my-research)
-]]
-
-
-.pull-right[
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('img/spectral_viewer.PNG')
-```
-.small[Source:[USGS](https://landsat.usgs.gov/spectral-characteristics-viewer)
-]]
 
 ---
 # Urban expansion 
@@ -233,320 +165,44 @@ knitr::include_graphics('img/LST_honeycombing.jpg')
 ]
 
 ---
+# Air pollution and LULC 2
 
-class: inverse, center, middle
 
-# Land Use and (?) Land Cover (LULC) 
+> There is no doubt that the LULC distribution significantly affects the MAP and LST. Therefore, to determine this relationship the latest LULC distribution shape-file was acquired from the National Cartographic Center of Iran (NCC)
+
+--
+
+> To figure out the impact of LULC on the LST and MAP (Major Air Pollutants) the following statistical comparison perform, the LULC was chosen as an independent variable whereas LST, PM₂.₅, SO₂, NO₂, CO, and O₃ are considered as dependent variables
+
+
+Although this wasn't used in regression...that was just for the scatter plots of the variables...
+
+But we have classified data (or we might) from a national center 
+  * although no data is given
+  * no accuracy or method provided
 
 ---
 
 # Urban green spaces
 
-**Sensors / data**
-.pull-left[
-* Landsat (medium res 17%)
-* Sentinel]
+> Our results show that the techniques are hybrid methods (37 cases), followed by object-based image analysis (29 cases), land cover indices (20 cases) and fraction methods (16 cases) 
 
-.pull-right[
-* LiDAR $
-* High spatial resolution (38%) $
-* High + medium res = 9%
-]
+Inventory and assessment (Inv_Ass);Biomass and carbon (BC);Change detection (CD); Ecosystem services (ES):Overall UGSs mapping (OUGS);Species mapping (Spe);Three-dimensional modeling (TDM).
 
-Studies
-
-  * Accessibility to urban green spaces - usual kind of stuff
-  
-  * Also, now types of vegetation - DEM, elevation models and relationship to well being and health 
-  
-  * Google street view! - sky view factor and iTree
-  
-  * Google Earth Engine - Compare health benefits in relation to green space over 25 cities
-
-* Vegetation health - targeted intervention 
-
-* Landscape indexes - mean patch size, patch density and edge density 
-
-.small[Remote sensing of urban green spaces: A review. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)
-]
----
-
-# Disaster response / preparedness  
-
-**Sensor**
-
-Sentinel-2 spectral imagery 
-
-  * Image difference (post event - pre-event)
-  * View-shed analysis (building outlines / DEM)
-  
-```{r echo=FALSE, out.width='80%', fig.align='center'}
-knitr::include_graphics('img/spectral_sig_diff.png')
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('img/UGS.jpg')
 ```
-
-.small[Building a 3D Model of the Beirut Explosion. Source:[Ollie Ballinger](https://oballinger.github.io/beirut-3D-model/)
-]
+.small[Fig. 2. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
 
 ---
 
-# Disaster response / preparedness 2
-
-```{r echo=FALSE, out.width='50%', fig.align='center'}
-knitr::include_graphics('img/GIF_1.gif')
-```
-
-.small[Building a 3D Model of the Beirut Explosion. Source:[Ollie Ballinger](https://oballinger.github.io/beirut-3D-model/)
-]
----
-
-class: inverse, center, middle
-
-# Synthetic Aperture Radar (SAR)
-
----
-
-# SAR floods
-
-**Sensor**
-
-* Sentinel-1 SAR 
-
-ENSO phases but this is from Australian La Niña 2022
-  * trade winds from south america intensity
-  * draw up cool deep waters and increase thermocline 
-  * temp difference increases, walker circulation intensifies - feedback loop
-  * more cloud + more rain + cyclones in West Pacific 
-
-```{r echo=FALSE, out.width='35%', fig.align='center'}
-knitr::include_graphics('img/SAR1.jpg')
-```
-
-.small[Eastern Australia Floods. Source:[brockmann-consult](https://www.brockmann-consult.de/eastern-australia-floods/)
-]
-
----
-
-# SAR background
-
-Synthetic Aperture Radar:
-  * Active sensors
-  * Have surface texture data
-  * See through weather and clouds 
-  * Different wavelengths - different applications
-  
-```{r echo=FALSE, out.width='50%', fig.align='center'}
-knitr::include_graphics('img/SAR_bands.PNG')
-```
-
-.small[What is Synthetic Aperture Radar?. Source:[NASA Earth Data](https://earthdata.nasa.gov/learn/backgrounders/what-is-sar)
-]
-  
----
-
-# SAR background 2
-
-  * Also different ploarizations - orientation of the plane in which EMR waves transmitted..
-  
-  > Polarization refers to the orientation of the plane in which the transmitted electromagnetic wave oscillates. While the orientation can occur at any angle, SAR sensors typically transmit linearly polarized. The horizontal polarization is indicated by the letter H, and the vertical polarization is indicated by V.
-  
-```{r echo=FALSE, out.width='75%', fig.align='center'}
-knitr::include_graphics('img/SARPolarization.jpg')
-```
-
-.small[What is Synthetic Aperture Radar?. Source:[NASA Earth Data](https://earthdata.nasa.gov/learn/backgrounders/what-is-sar)
-]
-
----
-
-# SAR image
+# Urban green spaces 2
 
 ```{r echo=FALSE, out.width='75%', fig.align='center'}
-knitr::include_graphics('img/SAR.png')
+knitr::include_graphics('img/UGS_objectives.jpg')
 ```
+.small[Fig. 2. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
 
-Paper also goes through some correction methods that should be familiar! 
-
-.small[Urban objects detection from C-band synthetic aperture radar (SAR) satellite images through simulating filter properties. Source:[Deepak Kumar, 2021](https://www.nature.com/articles/s41598-021-85121-9)
-]
-
----
-# SAR image 2
-
-"multitemporal colour composite SAR image, rice growing areas in the Mekong River delta, Vietnam 1996." 
-
-
-.pull-left[
-"Three SAR images acquired by the ERS satellite during 5 May, 9 June and 14 July in 1996 are assigned to the red, green and blue channels respectively for display. The colourful areas are the rice growing areas, where the landcovers change rapidly during the rice season. The greyish linear features are the more permanent trees lining the canals. The grey patch near the bottom of the image is wetland forest. The two towns appear as bright white spots in this image. An area of depression flooded with water during this season is visible as a dark region."
-
-]
-
-.pull-right[
-
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('img/multitemporal colour composite SAR image.png')
-```
-]
-
-.small[SAR Images. Source:[CRISP](https://crisp.nus.edu.sg/~research/tutorial/sar_int.htm)
-]
-
----
-
-# SAR background 3
-
-Scattering can change based on wavelength 
-
-Further penetration then the volume scattering will change
-
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('img/SARtree_figure2.jpg')
-```
-
-.small[What is Synthetic Aperture Radar?. Source:[NASA Earth Data](https://earthdata.nasa.gov/learn/backgrounders/what-is-sar)
-]
-
-
----
-# SAR background 4
-
-Some terms:   
-
-> Backscatter is the portion of the outgoing radar signal that the target redirects directly back towards the radar antenna
-
-The higher the backscattered intensity = rougher the surface. It is "unitless"
-
-Can be converted to "backscatter coefficient, or sigma nought", measured in decibel (dB) units = normalised measure of the radar return from a distributed target 
-
-If the signal is from backscatter is not desired = "clutter"
-
-* Has been used in urban monitoring BUT...
-
-  * Corner reflections in urban environments 
-  * Shadowing - building behind another not imaged 
-  * Speckle - grainy, from scattering on ground - "salt and pepper"
-  
-.small[Source:[NASA Earth Data](https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-1-sar/definitions#:~:text=Backscatter%20is%20the%20portion%20of,by%20which%20backscatter%20is%20formed.)
-]
-
-.small[Source:[Urban Area Delineation Using InSAR Products](https://webapps.itc.utwente.nl/librarywww/papers/msc_2002/gfm/luhega.pdf)
-]
-
----
-
-# Me on SAR
-
-> Although SAR images over urban areas provide low quality images due to problems associated with radar imaging in such an environment (i.e. multiple bouncing, layover and shadowing), SAR texture measures can provide valuable information in discerning urban areas (Dell’Acqua et al., 2003; Zhu et al., 2012). Isolated scattering of residential areas and crowded backscatters of inner city high density areas permit classification refinement, thus textural measures such as those descried within the spatial domain can aid identification of alternative urban forms (Zhu et al., 2012). 
-
->However, the lack of freely available SAR data that temporally coincides with other satellite imagery (e.g. Landsat) frequently precludes extensive use
-
-
----
-
-class: inverse, center, middle
-
-# To use SAR or not to use SAR...that is the question...
-
----
-
-# InSAR
-
-Interferometry Synthetic Aperture Radar (InSAR)
- * Take two RADAR observations of the target (e.g. the ground)
- * The two 
- * Use the phase difference 
- * Phase = 
-  > "total number of cycles of the wave at any given distance from the transmitter, including the fractional part"
-
-* Phase difference - SUBTRACT the values (measured phase values) at two different measurement points
-
-* Differential distance depends on the height of the terrain (topography)
-
-* Used for creating DEMs
-
-* Monitoring displacement of ground - earthquakes etc
-
-.small[INTERFEROMETRY EXPLAINED - MORE DETAIL. Source:[NASA SRTM](https://www2.jpl.nasa.gov/srtm/instrumentinterfmore.html)
-]
-  
-
----
-# InSAR 2
-
-Key terms
-
-* Coherence Map
-
-  >  Coherence is defined as the degree of similarity of backscattering response (or reflection characteristic of as measured by the SAR sensor) between corresponding ground cells in both SAR image of an InSAR pair. 
-
-* Differential Interferometry Synthetic Aperture Radar (DInSAR)
-  
-> "quantification of the ground displacement that occurred between the two acquisitions can be achieved" through a "differential interferogram"
-
-.small[Source:[Michel Gay](http://www.permanet-alpinespace.eu/archive/pdf/WP6_1_dinsar.pdf)
-]
-
----
-# InSAR 3
-
-
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('img/interf_fig4.gif')
-```
-
-.small[INTERFEROMETRY EXPLAINED - MORE DETAIL. Source:[NASA SRTM](https://www2.jpl.nasa.gov/srtm/instrumentinterfmore.html)
-]
-
----
-# SAR applications
-
-SAR applications, an emerging trend: https://www.mdpi.com/journal/remotesensing/special_issues/Urban_SAR 
-
-* Damage detection: https://www.sciencedirect.com/science/article/pii/S0924271621000010?casa_token=Peuv4YfQjsEAAAAA:wAdc-R2tEjK7L4maY6ZcOio3YyIZPnb7HgqXi5SQZAeIoYq8bApu9iA6H-281attgj1dwQ-IPz8 
-
-* Urban area mapping: https://www.sciencedirect.com/science/article/pii/S0034425721002352?casa_token=6kKdHHJ_GZ4AAAAA:LDl85LIgl6O8G_NNSgxfBgcGw7vpRrS0JAd5STW5obGnGDuO2l0RmkdzzLqLEbqNbO0MSzdhFPU
-
-* Urban flooding (lower backscatter coefficient): https://www.mdpi.com/2071-1050/12/14/5784 
-
-* Landslides
-
-* Earthquakes
-
-* Data fusion* / DEM creation
-
----
-
-# Monitoring forests + illegal logging 
-
-**Sensor**
-
-* Landsat (2000 to 2012)
-
-Monitoring forest loss and illegal logging 
-
-* Pre-processing
-
-> "Landsat pre-processing steps included: (i) image resampling, (ii) conversion of raw
-digital values (DN) to top of atmosphere (TOA) reflectance, (iii) cloud/shadow/water
-screening and quality assessment (QA), and (iv) image normalization"
-
-> The stack of QA layers was used to create a perpixel set of cloud-free image observations which in turn was employed to calculate timeseries spectral metrics.
-
----
-
-# Monitoring forests + illegal logging 2
-
-* Creating metrics
-
-> Metrics represent a generic feature space that facilitates regionalscale mapping and have been used extensively with MODIS and AVHRR data
-
-> (i) reflectance values representing maximum, minimum and selected percentile values 
-  (ii) mean reflectance values for observations between selected percentiles
-  (iii) slope of linear regression of band reflectance value versus
-image date.
-
-In support of this reference is given to [Hansen et al. 2010](https://www.pnas.org/doi/epdf/10.1073/pnas.0912668107)...supplementary material...
-
-> The time-sequential MODIS 32-dayinputs were transformed to annual metrics to produce a more generalized feature space
 
 ---
 # Monitoring forests + illegal logging 3
@@ -602,26 +258,6 @@ knitr::include_graphics('img/Hansen_forest_change.jpeg')
 
 Used in Brazil to [target illegal logging]( https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/) 
 
----
-# Monitoring forests + illegal logging 6
-
-> Decision trees are hierarchical classifiers that predict class membership by recursively partitioning a data set into more homogeneous or less varying subsets, referred to as nodes
-
-* Decision trees are part of a random forest classier
-
-* Take something complex and force into many decisions = if-else conditions or also called divide and conquer.
-
-* Often requires hyperparameters to train the model (or  control the learning process) - e.g. the choices we've made in the past...sort of...
-  * DBSCAN (radius of points, Epsilon or MinPts - to make a cluster)
-  * Spatial weight matrix (type and then weight)
-
-* Split the data into more and more homogeneous subsets (filtering!) this can be limited through
-  * pre-pruning - set a number of iterations before
-  * post-pruning - reduce groups afterwards based on accuracy.
-
-https://www.sciencedirect.com/science/article/abs/pii/S0924271616000265 
-
-https://lgatto.github.io/IntroMachineLearningWithR/unsupervised-learning.html#k-means-clustering 
 
 ---
 # Forest fires
@@ -646,84 +282,220 @@ knitr::include_graphics('img/hazard.png')
 ]]
 
 ---
+class: inverse, center, middle
 
-# Forest fires 2
+# In some form all these studies extracted Land Cover from EO data
 
-Whilst somewhat more complex with additional variables and analysis this approach is still being used...e.g. 
+--
+
+## But how can we do that
+
+---
+
+# Expert Systems
+
+> a system that uses human knowledge to solve problems that normally require human intelligence 
+
+```{r echo=FALSE, out.width='80%', fig.align='center'}
+knitr::include_graphics('img/expert_system.jfif')
+```
+.small[Source:[Aftab Alam](https://www.quora.com/What-is-a-knowledge-based-system-in-the-context-of-artificial-intelligence)
+]
+
+* Knowledge Base = Rules of thumb, not always correct
+
+* Inference Engine = Process of reaching a conclusion and the expert system is implemented
+
+
+This is different to an algorithmic approach = code to solve a solution and when the problem changes so does the code. See Jensen p.433
+
+---
+
+# Expert Systems 2
+
+The problem is how can a computer replicate human knowledge...
 
 .pull-left[
+**Q: Tell a computer how you arrived at the decision to wear the clothes you have on today or what you had for lunch yesterday** ?
 
-9 parameters in creating a fire action plan for Ecuador...
+You might try and represent your knowledge through a series of decisions = **knowledge representation through a decision tree**
 
-Fire severity - **Landsat-8 OLI** 2014 and 2020
+If you collected data on this you might be able to draw some conclusions...
 
-$dNDVI = pre NDVI − post NDVI$ 
-
-$dNBR = NBRpre − NBRpost$ (similar to NDVI)
-
-Verified from field visits 
-
-Call this a severity model? but kept the indices separate
-
-Used this to designate safe escape routes..
 ]
 
 .pull-right[
-```{r echo=FALSE, out.width='80%'}
-knitr::include_graphics('img/action_plan.png')
+
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/decision_tree.PNG')
 ```
-.small[Source:[Morante-Carballo et al. 2022](https://www.mdpi.com/2072-4292/14/8/1783)
+.small[From the diameter and height of a tree trunk, we must determine if it's an Apple, Cherry, or Oak tree. Source:[Machine Learning University explain](https://mlu-explain.github.io/)
+]]
+
+---
+
+# Decision and classification trees (CART)
+
+* When we create a decision tree the final leaves might be a mixture of the categories = **impure**
+
+.pull-left[
+
+* We quantify this with the Gini Impurity:
+  * 1-(probability of yes)^2-(the probability of no)^2
+  * weighted based on numbers 
+
+* The one with the lowest impurity goes at the top of the tree to start the decision making...**the root**
+
+* We then use the Gini impurity at each **branch** to split the nodes further 
+
+* Once we don't need to split these turn into **leaves** and the output has **the most votes**
+
+]
+
+.pull-right[
+
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/decision_tree2.PNG')
+```
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=_L39rN6gz7Y)
 ]]
 
 ---
 class: inverse, center, middle
 
-# Which variables used remote sensing?
 
---
-
-## Only the severity which wasn't even overlaid directly
-
---
-
-## The study was somewhat confusing with a focus on severity (the aim) which then changed to a fire action plan that didn't show severity as a factor
-
---
-
-## No method was given for the action plan development
+# Someone new comes along ...run them (or the data) through the tree
 
 ---
 
-class: inverse, center, middle
+# Decision and classification trees (CART) 2
 
-# The key is *usually* **combining the remote sensing data** with GIS or other datasets to answer questions
+What if we have a leaf with just one person or one pixel value?  = **overfitting**
 
---
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/bias.png')
+```
+.small[Source:[Seema Singh](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)]
 
-# The remotely sensed data is consistent over days, months and years
-
----
-class: inverse, center, middle
-
-
-# Often these papers don't: 
-## demonstrate the link to population / people
-## show how policy can be informed by the outcomes
 
 ---
 
-class: inverse, center, middle
+# Decision and classification trees (CART) 3
 
-# For example:
-## Where should iniatives be targetd for reducing air pollution
-## What areas / population are most at risk from forest fires or where should remeidation be targeted 
-## How can illegal monitoring be most effectively stopped
+We can either:
+* limit how trees grow (e.g. a minimum number of pixels in a leaf)
+* prune the tree:
+  * calculate the sum of the squared residuals (SSR, like linear regression) for each leaf
+  * Sum for the tree
+  * Tree score = SSR + tree penalty (alpha) * T (number of leaves) 
+
+```{r echo=FALSE, out.width='45%', fig.align='center'}
+knitr::include_graphics('img/decision_tree_prune.PNG')
+```
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
+]
+
+Alpha: use a full size tree (with **all** data), start with a value of 0 then increase until pruning gives lower tree score. 
+
+Different alpha gives us different sizes of tree that we can test with cross validation. 
 ---
-class: inverse, center, middle
 
-# We will explore methods in the next few weeks
+# Regression trees
 
-# But first we will explore policy to understand where remote sensing data can be applied.
+What if linear regression doesn't fit the data? ...but we still wanted a numeric value
+
+.pull-left[
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/regression_tree.PNG')
+```
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=g9c66TUylZ4)
+]]
+
+.pull-right[
+ 
+We divide this up into sections based on thresholds (nodes) and calculate the sum of the squared residuals...
+
+We can then check the SSR for different thresholds...**the one with the lowest SSR is the root of the tree to start with**...then repeat
+
+To prevent over fitting we can set **a minimum number of observations before splitting the data again**.
+]
+ 
+---
+
+# Regression trees 2
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/SSR.PNG')
+```
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=g9c66TUylZ4)
+]
+---
+
+# Regression trees 3
+
+* We can do this with many variables...we try different thresholds and calculate the SSR. 
+
+* The best SSR value across all variables becomes the root. 
+
+* Each leaf is a numeric value. 
+
+---
+
+# Image classification 
+
+* Turn every pixel in the image into one of a pre-defined categorical classification
+
+* Either supervised or unsupervised classification procedure:
+
+
+.pull-left[
+
+**supervised**
+
+* Pattern recognition or machine learning 
+* Classifier learns patterns in the data
+* Uses that to place labels onto new data
+* Pattern vector is used to classify the image
+
+Usually pixels treated in isolation but as we have seen - contextual (neighboring pixels), objects (polygons), texture
+
+
+]
+
+
+.pull-right[
+
+**unsupervised**
+
+* Identify of land cover classes aren't know a priori (before)
+* Tell them computer to cluster based on info it has (e.g. bands)
+* Label the clusters
+
+]
+
+---
+
+
+# Unsupervised 
+
+
+
+
+
+---
+# Supervised 
+
+
+
+  * class definition
+  * pre-processing
+  * training
+  * pixel assignment
+  * accuracy assessment
+
 
 ---
 # Global policy documents
