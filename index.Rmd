@@ -292,6 +292,32 @@ class: inverse, center, middle
 
 ---
 
+class: inverse, center, middle
+
+# How do you do that given some imagery ?
+
+
+.pull-left[
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/landsat1.jpg')
+```
+.small[Source:[NASA, acquired April 23, 1984](https://landsat.visibleearth.nasa.gov/view.php?id=89836)
+]]
+
+.pull-right[
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/landsat2.jpg')
+```
+.small[Source:[NASA, acquired July 20, 2016](https://landsat.visibleearth.nasa.gov/view.php?id=89836)
+]]
+
+
+### inductive learning = given context we can use experience to make judgement
+
+---
+
 # Expert Systems
 
 > a system that uses human knowledge to solve problems that normally require human intelligence 
@@ -332,6 +358,35 @@ knitr::include_graphics('img/decision_tree.PNG')
 ```
 .small[From the diameter and height of a tree trunk, we must determine if it's an Apple, Cherry, or Oak tree. Source:[Machine Learning University explain](https://mlu-explain.github.io/)
 ]]
+
+---
+
+class: inverse, center, middle
+
+# Machine learning = science of computer modeling of learning process
+
+--
+
+## When humans have some generalizations we can reach a logical assumption or conclusion = inductive learning.
+
+--
+
+
+## Machine learning this is a search through all the data to explain the input data and can be used on new input data
+
+---
+
+class: inverse, center, middle
+
+
+# What city am i in?
+
+
+### Population of 5.3 million
+### Median house price $1,116,219
+### Hemisphere: Southern
+### Continent: Australia 
+### Landmark: Opera house
 
 ---
 
@@ -436,15 +491,78 @@ knitr::include_graphics('img/SSR.PNG')
 
 # Regression trees 3
 
-* We can do this with many variables...we try different thresholds and calculate the SSR. 
+* We can do this with many predictor variables...we try different thresholds and calculate the SSR. 
 
-* The best SSR value across all variables becomes the root. 
+* The best SSR value **across all variables becomes the root**. 
 
-* Each leaf is a numeric value. 
+* Each leaf **is a numeric value** not category like in classification trees. 
 
 ---
 
+# Random Forests
+
+.pull-left[
+
+* Grow many classification decision trees - **Many better than one**
+* Each tree classifies a pixel - it votes for that class, most votes is the winner
+* For each tree about 70% of the training data is used, 30% is left out of the bag (OOB)
+* Or bootstrap [re-sampling by replacement](https://andrewmaclachlan.github.io/CASA0005repo_20202021/gwr-and-spatially-lagged-regression.html) can be used also termed "bagging"
+* One tree uses the whole dataset
+* Variables used per tree varies - subset of variables (square root of all of them) is considered at each split of the tree
+
+
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/random_forest.png')
+```
+.small[Source:[Rosaria Silipo](https://towardsdatascience.com/from-a-single-decision-tree-to-a-random-forest-b9523be65147)
+]]
+
+???
+
+we take the original dataset and select random data points from within it, but in order to keep it the same size as the original dataset some records are duplicated
+---
+
+# Random Forests 2
+
+
+.pull-left[
+* No pruning - trees can do down to largest extent
+
+* **Out of Bag Error**
+  * all trees that didn't have the values (e.g. rows in the data) in
+  * average prediction error - number of correct predicted/total
+  
+* Validation data
+  * different from OOB
+  * never included within the decision trees
+  
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/OOB.PNG')
+```
+.small[Source:[Navnina Bhatia](https://towardsdatascience.com/what-is-out-of-bag-oob-score-in-random-forest-a7fa23d710)
+]]
+
+  
+---
+class: inverse, center, middle
+
+# How do we apply this to imagery
+
+```{r echo=FALSE, out.width='85%', fig.align='center'}
+knitr::include_graphics('img/landsat2.jpg')
+```
+.small[Source:[NASA, acquired July 20, 2016](https://landsat.visibleearth.nasa.gov/view.php?id=89836)
+]
+---
+
 # Image classification 
+
 
 * Turn every pixel in the image into one of a pre-defined categorical classification
 
@@ -478,6 +596,12 @@ Usually pixels treated in isolation but as we have seen - contextual (neighborin
 
 ---
 
+class: inverse, center, middle
+
+# There are *generic* machine learning algorithms and remote sensing specific ones*
+
+
+---
 
 # Unsupervised 
 
