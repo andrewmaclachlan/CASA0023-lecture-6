@@ -606,7 +606,61 @@ class: inverse, center, middle
 # Unsupervised 
 
 
+Usually referred to as clustering / also k-means:
 
+* Place points randomly or uniformly across spectral feature space or across the first PCA
+  * Set the radius in spectral feature space at which new cluster to new started 
+  * Spectral distance to merge (within they are the same)
+  * Number of pixels to be considered before merging
+  * Max number of clusters
+  * Clusters migrate over time - see Jensen page 404.
+  
+Repeat until N iterations or no allocations of pixels left.
+
+
+```{r echo=FALSE, out.width='45%', fig.align='center'}
+knitr::include_graphics('img/cluster_means.png')
+```
+.small[Source:[Yuting Wan](https://www.researchgate.net/figure/Encoding-strategy-for-the-EAs-based-remote-sensing-image-clustering-approaches_fig2_320378302)
+]
+
+
+---
+
+# Unsupervised 2
+
+**ISODATA**
+
+.pull-left[
+Same as k-means but adds:
+  * Any clusters have so few pixels = meaningless 
+  * Clusters are so close they can be merged 
+  * Clusters can be split - elongated clusters in feature space
+  
+Typically inputs can include:
+  * max clusters
+  * Max % pixels of class values that can be unchanged - stops
+  * Max times of iterations
+  * Min pixels per cluster
+  * Max standard deviation - then split the cluster
+  * Min distance between clusters (3)
+
+]
+
+.pull-right[
+
+```{r echo=FALSE, out.width='50%', fig.align='center'}
+knitr::include_graphics('img/isodata.PNG')
+```
+.small[Source:[Jensen p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
+]
+
+
+]
+---
+# Unsupervised 3
+
+## Cluster busting
 
 
 ---
@@ -621,6 +675,29 @@ class: inverse, center, middle
   * accuracy assessment
 
 
+---
+
+# Hard or soft
+
+.pull-left[
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/fuzzy.PNG')
+```
+.small[Source:[Jensen, page 413/Slides](http://web.pdx.edu/~nauna/week7-final.pdf)
+]]
+
+
+
+.pull-right[
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/Four-causes-of-mixed-pixels.png')
+```
+.small[Source:[Peter Fisher](https://www.researchgate.net/figure/Four-causes-of-mixed-pixels_fig3_242103275)
+
+]]
+
+.small[[A. P. Cracknell, 2010, Review article Synergy in remote sensing-what's in a pixel?](https://www.tandfonline.com/doi/pdf/10.1080/014311698214848?needAccess=true)
+]
 ---
 # Global policy documents
 
