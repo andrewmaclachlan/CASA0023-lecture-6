@@ -652,7 +652,7 @@ Typically inputs can include:
 ```{r echo=FALSE, out.width='50%', fig.align='center'}
 knitr::include_graphics('img/isodata.PNG')
 ```
-.small[Source:[Jensen p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
+.small[Source:[Jensen 2016 p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
 ]
 
 
@@ -662,6 +662,32 @@ knitr::include_graphics('img/isodata.PNG')
 
 ## Cluster busting
 
+.pull-left[
+ISODATA can create lots of clusters and it's difficult to assign meaning (e.g. landcover)
+
+  * Two types of landcover in the pixel 
+  * distribution of mean vectors not good enough to differentiate them
+
+Let's **bust those clusters!**
+  * Take the incorrect or difficult to label ones
+  * Mask them
+  * Perform a separate classification 
+  * Repeat 
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='80%', fig.align='center'}
+knitr::include_graphics('img/ISODATA2.PNG')
+```
+.small[Source:[Jensen 2016 p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
+]
+
+]
+---
+
+class: inverse, center, middle
+
+# How does supervised differ from unsupervised...?
 
 ---
 # Supervised 
@@ -698,6 +724,13 @@ knitr::include_graphics('img/Four-causes-of-mixed-pixels.png')
 
 .small[[A. P. Cracknell, 2010, Review article Synergy in remote sensing-what's in a pixel?](https://www.tandfonline.com/doi/pdf/10.1080/014311698214848?needAccess=true)
 ]
+---
+
+# Summary 
+
+https://gisgeography.com/image-classification-techniques-remote-sensing/
+
+https://www.researchgate.net/figure/Land-use-mapping-Maximum-Likehood-Classification-In-this-study-maximum-likelihood_fig1_263471542
 ---
 # Global policy documents
 

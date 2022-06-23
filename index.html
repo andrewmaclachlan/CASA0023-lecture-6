@@ -32,7 +32,7 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d17c01dab4d6447e826bf156957eec39","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d98f7c0eeca24d1d886b2c22fc77705f","expires":1}</script>
     <script src="libs/himalaya/himalaya.js"></script>
     <link href="libs/editable/editable.css" rel="stylesheet" />
     <script src="libs/editable/editable.js"></script>
@@ -654,7 +654,7 @@ Typically inputs can include:
 .pull-right[
 
 &lt;img src="img/isodata.PNG" width="50%" style="display: block; margin: auto;" /&gt;
-.small[Source:[Jensen p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
+.small[Source:[Jensen 2016 p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
 ]
 
 
@@ -664,6 +664,30 @@ Typically inputs can include:
 
 ## Cluster busting
 
+.pull-left[
+ISODATA can create lots of clusters and it's difficult to assign meaning (e.g. landcover)
+
+  * Two types of landcover in the pixel 
+  * distribution of mean vectors not good enough to differentiate them
+
+Let's **bust those clusters!**
+  * Take the incorrect or difficult to label ones
+  * Mask them
+  * Perform a separate classification 
+  * Repeat 
+]
+
+.pull-right[
+&lt;img src="img/ISODATA2.PNG" width="80%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Jensen 2016 p.409 / Muhammad Zulkarnain Abdul Rahman](https://people.utm.my/nurulhazrina/files/2015/05/L12-Unsupervised-classification.pdf)
+]
+
+]
+---
+
+class: inverse, center, middle
+
+# How does supervised differ from unsupervised...?
 
 ---
 # Supervised 
@@ -696,6 +720,13 @@ Typically inputs can include:
 
 .small[[A. P. Cracknell, 2010, Review article Synergy in remote sensing-what's in a pixel?](https://www.tandfonline.com/doi/pdf/10.1080/014311698214848?needAccess=true)
 ]
+---
+
+# Summary 
+
+https://gisgeography.com/image-classification-techniques-remote-sensing/
+
+https://www.researchgate.net/figure/Land-use-mapping-Maximum-Likehood-Classification-In-this-study-maximum-likelihood_fig1_263471542
 ---
 # Global policy documents
 
