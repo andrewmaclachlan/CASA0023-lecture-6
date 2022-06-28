@@ -32,7 +32,7 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d98f7c0eeca24d1d886b2c22fc77705f","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"a3f171710225429089c46a9ffe055780","expires":1}</script>
     <script src="libs/himalaya/himalaya.js"></script>
     <link href="libs/editable/editable.css" rel="stylesheet" />
     <script src="libs/editable/editable.js"></script>
@@ -70,7 +70,7 @@ class: inverse, center, title-slide, middle
 
 ### Lecture 5: Classification
 
-### 02/02/2022 (updated: 23/06/2022)
+### 02/02/2022 (updated: 28/06/2022)
 
 <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></svg>[a.maclachlan@ucl.ac.uk](mailto:a.maclachlan@ucl.ac.uk)
 <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>[andymaclachlan](https://twitter.com/andymaclachlan)
@@ -566,6 +566,12 @@ class: inverse, center, middle
 .small[Source:[NASA, acquired July 20, 2016](https://landsat.visibleearth.nasa.gov/view.php?id=89836)
 ]
 ---
+# Classification trends
+
+&lt;img src="img/image-classification-timeline3.png" width="85%" style="display: block; margin: auto;" /&gt;
+.small[Source:[GISGeography](https://gisgeography.com/image-classification-techniques-remote-sensing/)
+]
+---
 
 # Image classification 
 
@@ -692,7 +698,38 @@ class: inverse, center, middle
 ---
 # Supervised 
 
+Parametric (normal distribution) or non parametric (not normal)? 
 
+I would call most of these **"classical"** or **"traditional"** classifiers as they aren't used *much* now
+
+.pull-left[
+**Parametric**
+* Maximum likelihood
+
+]
+
+
+.pull-right[
+**Non-parametric**
+
+* Density slicing
+* Parallelpiped
+* Minimum distance to mean 
+* Nearest neighbor 
+* Neural networks
+* Machine learning / expert systems*
+
+]
+  
+* More recent work uses machine learning / expert systems(e.g. Support Vector Machine, Neural Networks   ) or spectral mixture analysis
+  
+---
+  
+# Supervised 2
+ 
+.pull-left[
+
+Same process for all:
 
   * class definition
   * pre-processing
@@ -700,16 +737,172 @@ class: inverse, center, middle
   * pixel assignment
   * accuracy assessment
 
+] 
+ 
+  
+.pull-right[
+&lt;img src="img/supervised-diagram.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[GIS Geography](https://gisgeography.com/supervised-unsupervised-classification-arcgis/)
+]
+]
+
+---
+class: inverse, center, middle
+
+# Here we will focus on two common methods - maximum likelihood and support vector machines
+
+## We have already covered decision trees and random forests
+
+## But...
 
 ---
 
-# Hard or soft
+# Supervised 3
+
+An approach to select a classifier...in most cases training samples will overlap...unless you select **spectrally pure endmembers** or use a **spectral library**.  
+
+.pull-left[
+
+&lt;img src="img/supervised-classification-algorithm-selection-en.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Pavel Ukrainski](http://www.50northspatial.org/pick-best-supervised-classification-method/)
+]
+
+] 
+ 
+  
+.pull-right[
+&lt;img src="img/parallelepiped.PNG" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Pavel Ukrainski](http://www.50northspatial.org/pick-best-supervised-classification-method/)]
+]
+
+
+---
+# Maximum likelihood
+
+
+.pull-left[
+**Basics**
+
+* Decision rule classifier 
+* Uses probability 
+* Takes the image and assigns pixel to the most probable land cover type.
+* You can set a probability threshold which means if a pixel is below it = no classification. 
+
+] 
+ 
+  
+.pull-right[
+&lt;img src="img/029.PNG" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Machine Learning Mastery](https://machinelearningmastery.com/probability-density-estimation/)]
+]
+
+
+
+---
+
+# Maximum likelihood 2
+
+
+.pull-left[
+**Specifics**
+
+* From histogram to probability density function
+  * mean and standard deviation of training data
+* In imagery this is *n* dimensional multivariate normal density function - see Jensen p.399 for equation. 
+* Each pixel from image data is passed to the maximum likelihood rule &gt; assigns landover to the largest product.
+
+
+
+] 
+  
+.pull-right[
+
+&lt;img src="img/maximum.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Núñez et al. 2018 High-Resolution Satellite Imagery Classification for Urban Form Detection](https://www.intechopen.com/chapters/64971)]
+]
+
+---
+class: inverse, center, middle
+
+# Maximum Likelihood allows classification with **prior** pobablity information (e.g. 60% expected to be urban)
+
+## Usually we don't have this though 
+
+---
+class: inverse, center, middle
+
+# Terminology alert
+
+## Pattern vector = all the band values per pixel (could include texture etc) 
+
+---
+
+# Support Vector Machine (SVM)
+
+
+.pull-left[
+
+
+* Simply a linear binary classifier - like logistic regression! 
+
+* Maximum **margin** between two classes of training data
+
+* Points on the boundaries are **support vectors**
+
+* Middle margin is called the **separating hyperplane**
+
+] 
+  
+.pull-right[
+
+This can be thought of as training data for class a on one side and training data for class b on the other side, with band 1 on the x axis and band 2 on the y axis. 
+
+&lt;img src="img/svm.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Núñez et al. 2018 High-Resolution Satellite Imagery Classification for Urban Form Detection](https://www.intechopen.com/chapters/64971)]
+]
+
+---
+
+# Support Vector Machine (SVM) 2
+
+.pull-left[
+
+* Underlying theory is **structural risk minimisation**
+  * Minimise error on unseen data with no assumptions on the distribution 
+  
+* If they aren't linearly separable we can transform the data with the **kernel trick**  
+  * Apply some function to make them linearly separable 
+
+Selectable:
+* [Type of kernel](https://www.geeksforgeeks.org/major-kernel-functions-in-support-vector-machine-svm/)
+* `\(C\)` controls training data and decision boundary maximisation plus margin errors. The bigger = narrower margin.
+] 
+  
+.pull-right[
+
+&lt;img src="img/kernel_trick.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="img/quadratic_transformation.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Drew Wilimitis](https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f#:~:text=The%20%E2%80%9Ctrick%E2%80%9D%20is%20that%20kernel,the%20data%20by%20these%20transformed)]
+]
+
+---
+class: inverse, center, middle
+
+# Some considerations...
+
+---
+class: inverse, center, middle
+
+# **Do not** just present a study that classifies imagery ...look back at the examples and how else LULC be used
+
+---
+# Hard or soft?
 
 .pull-left[
 &lt;img src="img/fuzzy.PNG" width="100%" style="display: block; margin: auto;" /&gt;
 .small[Source:[Jensen, page 413/Slides](http://web.pdx.edu/~nauna/week7-final.pdf)
 ]]
-
 
 
 .pull-right[
@@ -721,298 +914,61 @@ class: inverse, center, middle
 .small[[A. P. Cracknell, 2010, Review article Synergy in remote sensing-what's in a pixel?](https://www.tandfonline.com/doi/pdf/10.1080/014311698214848?needAccess=true)
 ]
 ---
+# Pixels or objects?
+
+.pull-left[
+&lt;img src="img/OBIA_1.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Jakub Nowosad, supercells](https://jakubnowosad.com/supercells/articles/rgb_vars.html)
+]
+]
+.pull-right[
+&lt;img src="img/OBIA.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Jakub Nowosad, supercells](https://jakubnowosad.com/supercells/articles/rgb_vars.html)
+]
+]
+
+&lt;img src="img/OBIA_3.png" width="50%" style="display: block; margin: auto;" /&gt;
+.small[Average colour per segment. Source:[Jakub Nowosad, supercells](https://jakubnowosad.com/supercells/articles/rgb_vars.html)
+]
+---
+class: inverse, center, middle
+
+# Pixels or objects?
+
+## This stems from simple linear iterative clustering (SLIC)...which uses k-means clustering to create the superpixels. See [Achanta et al. (2012)](https://pubmed.ncbi.nlm.nih.gov/22641706/)
+
+---
+# Blackbox?
+
+&lt;img src="img/blackbox.PNG" width="70%" style="display: block; margin: auto;" /&gt;
+.small[Source:[SHEYKHMOUSA et al. 2020 Support Vector Machine Versus Random Forest for Remote Sensing Image Classification: A Meta-Analysis and Systematic Review](https://www.researchgate.net/figure/Four-causes-of-mixed-pixels_fig3_242103275)]
+
+---
 
 # Summary 
+
+---
+
+# Task 
+
+For the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. 
+
+For the task this week you need to:
+
+* Select **two** classification methods and in a maximum of three paragraphs:
+  * Describe how they work
+  * Outline benefits and limitations for each 
+  * Demonstrate how they have been used in literature or policy 
+  * Reference at least two studies
+  
+---
+# Papers
 
 https://gisgeography.com/image-classification-techniques-remote-sensing/
 
 https://www.researchgate.net/figure/Land-use-mapping-Maximum-Likehood-Classification-In-this-study-maximum-likelihood_fig1_263471542
----
-# Global policy documents
 
-* New Urban Agenda = standards and principles for planning, construction, development, management and urban improvement
-
-An example of commitments... Environmentally sustainable and resilient urban development subsection
-
-
-.panelset[
-
-.panel[.panel-name[point 64]
-
-&gt; We also recognize that urban centres worldwide, especially in developing countries, often have characteristics that make them and their inhabitants especially vulnerable to the adverse impacts of climate change and other natural and human-made hazards, 
-
-&gt; **including earthquakes, extreme weather events, flooding, subsidence, storms, including dust and sand storms, heatwaves, water scarcity, droughts, water and air pollution, vector-borne diseases and sea level rise,**
-
-&gt; which particularly affect coastal areas, delta regions and small island developing States, among others.
-]
-
-.panel[.panel-name[point 65]
-
-&gt; We commit ourselves to facilitating the 
-
-&gt; **sustainable management of natural resources in cities and human settlements in a manner that protects and improves the urban ecosystem and environmental services, reduces greenhouse gas emissions and air pollution and promotes disaster risk reduction and management**, 
-
-&gt;by supporting the development of disaster risk reduction strategies and periodical assessments of disaster risk caused by natural and human-made hazards, including standards for risk levels..
-]
-
-.panel[.panel-name[point 67]
-
-  &gt;We commit ourselves to promoting the creation and maintenance of well-connected and well distributed networks of 
-  
-  &gt; **open, multipurpose, safe, inclusive, accessible, green and quality public spaces, to improving the resilience of cities to disasters and climate change, including floods, drought risks and heat waves**
-  
-  &gt;  to improving food security and nutrition, physical and mental health, and household and ambient air quality, to reducing noise and promoting attractive and liveable cities, human settlements and urban landscapes and to prioritizing the conservation of endemic
-species. 
-
-]
-]
-
-  
----
-# Global policy documents
-
-* Sustainable Development Goals (SDG) = targets with measurable indicators for monitoring 
-
-* Full indicators and notes on [SDG indicators](https://unstats.un.org/sdgs/metadata/?Text=&amp;Goal=11&amp;Target=)
-
-.panelset[
-.panel[.panel-name[Goal 11]
-
-  * Goal 11: Make cities and human settlements inclusive, safe, resilient and sustainable 
-]
-
-.panel[.panel-name[Target 11.5]
-
-* Target 11.5: By 2030, significantly reduce the number of deaths and the number of people affected and substantially decrease the direct economic losses relative to global gross domestic product caused by disasters, including water-related disasters, with a focus on protecting the poor and people in vulnerable situations
-
-]
-
-.panel[.panel-name[Monitoring 11.5]
-* 11.5.1 Number of deaths, missing persons and directly affected persons attributed to disasters per 100,000 population
-
-*  11.5.2 Direct economic loss attributed to disasters in relation to global gross domestic product (GDP)
-
-* 11.5.3 (a) Damage to critical infrastructure and (b) number of disruptions to basic services, attributed to disasters
-]
-
-.panel[.panel-name[Data 11.5]
-* 11.5.1 (and .2) Data provider at national level is appointed Sendai Framework Focal Points. In most countries disaster **data are collected by line ministries and national disaster loss databases are established and managed by special purpose agencies including national disaster management agencies, civil protection agencies, and meteorological agencies**. The Sendai Framework Focal Points in each country are responsible of data reporting through the Sendai Framework Monitoring System.
-
-* 11.5.3 National disaster loss database, reported to UNISDR...**Not every country has a comparable national disaster loss database that is consistent with these guidelines** (although current coverage exceeds 89 countries). Therefore, by 2020, it is expected that all countries will build/adjust national disaster loss databases according to the recommendations and guidelines by the OEIWG.
-]
-]
-
----
-class: inverse, center, middle
-
-# Positives and negatives with this guidance? 
-
-???
-
-All about monitoring, doesn't say how to do it...but this is changing
-
----
-# Global policy documents
-
-Some new additions that have included spatial data...e.g...
-
-.panelset[
-.panel[.panel-name[Target 11.7]
-
-By 2030, provide universal access to safe, inclusive and accessible, green and public spaces, in particular for women and children, older persons and persons with disabilities
-
-* Indicator 11.7.1: Average share of the built-up area of cities that is open space for public use for all, by sex, age and persons with disabilities
-
-&gt; Satellite imagery (open sources), documentation outlining publicly owned land and community-based maps are the main sources of data.
-
-But...
-
-&gt; High resolution satellite imagery or Google Earth imagery can be used in this analysis. Open data sources such as OpenStreetMap (OSM) have some polygon data on open spaces in many cities
-
-]
-
-.panel[.panel-name[Target 11.6]
-
-By 2030, reduce the adverse per capita environmental impact of cities, including by paying special attention to air quality and municipal and other waste management
-
-* Indicator 11.6.2: Annual mean levels of fine particulate matter (e.g. PM2.5 and PM10) in cities (population weighted)
-
-&gt; Sources of data include ground measurements from monitoring networks, collected for 3,000 cities and localities (WHO 2016) around the world, satellite remote sensing, population estimates...
-
-&gt; estimated with improved modelling using data integration from satellite remote sensing, population estimates, topography and ground measurements (WHO, 2016a; Shaddick et al, 2016)
-
-* The paper by Shaddick is hard to follow with no code.
-
-]
-.panel[.panel-name[Reflections]
-
-These are two examples but comment on the complexity of the approaches..
-
-* Who are they targeted at, what end user
-* Who could replicate them
-* Are they useful - how could the results be used
-
-]
-]
----
-# Metropolitan policy documents
-
-Under the theme of disaster (flooding, landslides, drought, heatwaves etc)
-
-.panelset[
-.panel[.panel-name[London]
-
-**Increasing efficiency and resilience**
-
-* These environmental threats are real and present, and London must be prepared for them. London’s homes and infrastructure must be protected against the increasing likelihood of heatwaves, and developments must plan for a more integrated approach to water management, while minimising flood risk.
-
-
-**Policy SI 12 Flood risk management **
-
-* Development Plans should use the Mayor’s Regional Flood Risk Appraisal and their Strategic Flood Risk Assessment as well as Local Flood Risk Management Strategies, where necessary, to identify areas where particular and cumulative flood risk issues exist and develop actions and policy
-approaches aimed at reducing these risks.
-
-
-.panel[.panel-name[OneNYC 2050]
-
-* References the sustainable development goals
-* Has a hazards matrix
-
-&lt;img src="img/NYC.png" width="40%" style="display: block; margin: auto;" /&gt;
-.small[Source:[oneNYC](https://1w3f31pzvdm485dou3dppkcq-wpengine.netdna-ssl.com/wp-content/uploads/2019/11/OneNYC-2050-A-Livable-Climate-11.7.pdf)
-]]
-]
-.panel[.panel-name[OneNYC 2050 2]
-
-
-* Discusses coastal resiliency as an example of rising sea levels and flooding...BUT?
-
-.pull-left[
-&lt;img src="img/floods1.png" width="70%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-&lt;img src="img/floods2.png" width="70%" style="display: block; margin: auto;" /&gt;
-]
-.small[Source:[oneNYC](https://1w3f31pzvdm485dou3dppkcq-wpengine.netdna-ssl.com/wp-content/uploads/2019/11/OneNYC-2050-A-Livable-Climate-11.7.pdf)
-]]
-
-.panel[.panel-name[Cape Town]
-
-[Cape Town Municipal Spatial Development Framework](https://www.capetown.gov.za/work%20and%20business/planning-portal/regulations-and-legislations/cape-town-spatial-development-framework#section-docs)
-
-* "worst recorded drought in the city’s history, is a stark reminder that all cities will need to become more robust, resilient and efficient"
-
-* "The Cape Town Spatial Development Framework (CTSDF) was approved in May 2012 and established a long-term spatial vision and policy framework for the City after extensive technical drafting and public participation."
-
-* "Careful management of development to avoid developing in high flood risk areas"
-
-States policies and their requirements ...BUT...
-
-
-]
-
-.panel[.panel-name[Ahmedabad]
-
-* 2010 severe heatwave leading to 1,344 additional deaths
-
-* [2016 Heat Action Plan](https://www.nrdc.org/sites/default/files/ahmedabad-heat-action-plan-2016.pdf):
-  * Awareness and outreach
-  * Early warning system
-  * Capacity of health care professionals
-  * Reduce heat exposure and promote adaptive mesaures ...and mapping high risk areas, although mapping was removed later in the document (page 11)
-
-* Doesn't seem to appear in the publications, although spatial analysis is listed as a long term opportunity in the second paper: 
-
-  - [Development and Implementation of South Asia’s First Heat-Health Action Plan in Ahmedabad (Gujarat, India)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4024996/)
-  - [Rising Temperatures, Deadly Threat:
-Recommendations for Ahmedabad’s Government Officials](https://www.nrdc.org/sites/default/files/india-heat-government-officials-IB.pdf)
-
-]
-]
-
-
----
-
-# Local policy documents
-
-In most of the previous examples the documents were created by the metropolitan government:
-  * Greater London Authority 
-  * Amdavad Municipal Corporation
-  * City of New York
-
-Usually these are considered an upper tier
-
-They set the strategic plan for the city and may have other responsibilities such as fire, policing, transport and development guidelines.
-
-Lower tier government then carries out or adheres to these goals, for example....
-
-* The Western Australian Planning Commission sets the statutory planning guidance that is carried out by local cities, such as the City of Perth and City of Fremantle.
-
-* The Greater London Authority set the strategic goals for London with London Boroughs providing local services. 
-
----
-
-# Local policy documents 2
-
-**BUT** there are variations to this rule..
-
-.panelset[
-.panel[.panel-name[City of Cape Town]
-
-* The City of Cape Town is a metropolitan municipality or Category A municipality, there is no local municipality below it.
-
-* However, **above** the City of Cape Town is the Provincial government that is responsible for topics such as: agriculture, education, health and public housing. As such the City sets it's own development plan and then implements it (whilst adhering to relevant Provincial topics).
-
-]
-
-.panel[.panel-name[New York]
-
-
-* City of New York is responsible for public education, correctional institutions, public safety, recreational facilities, sanitation, water supply, and welfare services
-
-* 5 Boroughs under it act as spokespeople
-
-* City Council has 51 members from districts of about 157,000 
-* New York City is responsible for setting and enacting the policy. State government is above it.
-]
-]
----
-
-# Task 1
-
-For the individual assignment of the module you are required to produce a online portfolio of independent study and response questions. 
-
-For the practical session this week **come** prepared **to talk** about the following:
-
-- Search for one metropolitan policy challenge (any city in the World) that could be solved by incorporating remotely sensed data
-
-- Identify and evaluate a remotely sensed data set that could used to assist with contributing to the policy goal
-
--  Demonstrate how this links to global agendas / goals
-
-- Explain how it advances current local, national or global approaches.
-
-Cities will have a diverse range of documentation available...
-
----
-# Task 2
-
-Following the practical and subsequent discussion write up your case study city in three paragraphs, you should:
-
-* Detail the relevant policy that can be assisted with remotely sensed data
-* Evaluate how remotely sensed data set(s) could used to assist with contributing to the policy goal
-* Place it within local / global agendas and current approaches
-* Cite the relevant policy and where appropriate literature.
-
-Should you struggle to find current approaches within your city explore other cities discussed within the practical. 
-
----
-
-https://link.springer.com/article/10.1007/s41207-016-0007-4
-
-https://www.sciencedirect.com/journal/international-journal-of-applied-earth-observation-and-geoinformation/vol/108/suppl/C 
-
+Read: https://www.tandfonline.com/doi/full/10.1080/01431160512331314083
 ---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
