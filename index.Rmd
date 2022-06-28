@@ -847,6 +847,8 @@ class: inverse, center, middle
 
 ## Pattern vector = all the band values per pixel (could include texture etc) 
 
+## Also recall [how we can fuse data from lecture 3](https://andrewmaclachlan.github.io/CASA0023-lecture-3/?panelset2=fusion&panelset3=dn2&panelset4=ratio2&panelset5=pca2#48)
+
 ---
 
 # Support Vector Machine (SVM)
