@@ -400,13 +400,26 @@ class: inverse, center, middle
 
 ---
 
+class: center, middle
+
+
+## Is linear regression machine learning?
+
+--
+
+## Yes, the model finds the best fit between independent and dependent variables 
+
+## You are fitting a model to some data which could be used for prediction...
+
+---
+
 # Decision and classification trees (CART)
 
 * When we create a decision tree the final leaves might be a mixture of the categories = **impure**
 
 .pull-left[
 
-* We quantify this with the Gini Impurity:
+* We quantify this with the Gini Impurity (worked example on next slide):
   * 1-(probability of yes)^2-(the probability of no)^2
   * weighted based on numbers 
 
@@ -428,44 +441,72 @@ knitr::include_graphics('img/decision_tree2.PNG')
 ]]
 
 ---
-class: inverse, center, middle
+# Gini impurity in more detail...
 
+.pull-left[
+* How do we decide what data to start the tree with ?
+
+* Does someone **who loves popcorn or soda** love the song cool as ice?
+
+* If we have a yes and no we phrase this an impure leaf...and we quantify this with the Gini Impurity
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/decision_tree3.PNG')
+```
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=_L39rN6gz7Y)
+]
+]
+
+
+.pull-right[
+* Gini impurity= 1-(probability of yes)^2-(the probability of no)^2
+
+$1-(\frac{1}{1+3})^2 - (\frac{3}{1+3})^2$
+
+Gini impurity for popcorn = true is 0.375 vs false is 0.444
+
+But they have different numbers of people, so we take weighted average for the variable...
+
+weight for left = people in leaf (4) / total in both leaves (7) * impurity (0.375) 
+weight for right = people in leaf (3) / total in both leaves (7) * impurity (0.444) 
+
+Add together, so impurity for loves popcorn is 0.405
+
+**lowest impurity wins**
+
+]
+---
+
+class: inverse, center, middle
 
 # Someone new comes along ...run them (or the data) through the tree
 
 ---
 
-# Decision and classification trees (CART) 2
+# Regression trees 
 
-What if we have a leaf with just one person or one pixel value?  = **overfitting**
+.pull-left[
+* Take and predict continuous values (e.g. amount of pollution)
+
+* Classification trees take and predict discrete values (e.g. landcover)
 
 ```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('img/bias.png')
+knitr::include_graphics('img/regression_tree_2.png')
 ```
-.small[Source:[Seema Singh](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)]
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
+]]
 
+.pull-right[
+* How do we decide where to make the breaks in the data...**residuals** (like linear regression) for each threshold (which is a value on the x axis) 
 
----
-
-
-# Decision and classification trees (CART) 3
-
-We can either:
-* limit how trees grow (e.g. a minimum number of pixels in a leaf)
-* prune the tree:
-  * calculate the sum of the squared residuals (SSR, like linear regression) for each leaf
-  * Sum for the tree
-  * Tree score = SSR + tree penalty (alpha) * T (number of leaves) 
-
-```{r echo=FALSE, out.width='45%', fig.align='center'}
-knitr::include_graphics('img/decision_tree_prune.PNG')
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/regression_tree_3.png')
 ```
 .small[Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
 ]
 
-Alpha: use a full size tree (with **all** data), start with a value of 0 then increase until pruning gives lower tree score. 
+]
 
-Different alpha gives us different sizes of tree that we can test with cross validation. 
 ---
 
 # Regression trees
@@ -502,11 +543,70 @@ knitr::include_graphics('img/SSR.PNG')
 
 # Regression trees 3
 
-* We can do this with many predictor variables...we try different thresholds and calculate the SSR. 
+* We can do this with many predictor variables...we try different thresholds and calculate the sum of squared residuals (SSR) - e.g. age or gender
 
-* The best SSR value **across all variables becomes the root**. 
+* The best sum of squared residuals (SSR) value **across all variables becomes the root**. 
+
+* Each predictor is then used in the process based on lowest sum of squared residuals (SSR)
 
 * Each leaf **is a numeric value** not category like in classification trees. 
+
+---
+
+# Overfitting
+
+What if we have a leaf with just one person or one pixel value?  = **overfitting**
+
+* Bias = difference between predicted value and true value = oversimplifies model
+
+* Variance = variability of model for a given point = does not genearlise well
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/bias.png')
+```
+.small[Source:[Seema Singh](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)]
+
+
+---
+
+# Overfitting 2
+
+We can either:
+* limit how trees grow (e.g. a minimum number of pixels in a leaf, 20 is often used)
+
+* Weakest link pruning:
+  * calculate the sum of the squared residuals (SSR, like linear regression) for each leaf (final decision)
+  * use one less leaf, remove a leaf = **sub-tree**, SSR will get larger = **PRUNE**
+  * Sum for the tree
+  * Tree score = SSR + tree penalty (alpha) * T (number of leaves) 
+
+---
+
+# Overfitting 3
+
+```{r echo=FALSE, out.width='45%', fig.align='center'}
+knitr::include_graphics('img/decision_tree_prune.PNG')
+```
+.small[Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
+]
+
+* [Alpha](https://youtu.be/D0efHEJsfHo?t=684): use a full size regression tree (with **all** data), start with a value of 0 then increase **until pruning** (removing a leaf) gives lower **tree score** .
+
+  * Divide the data into training and testing data using the alpha values from before
+
+  * Calculate the SSR using the testing data...which alpha has the smallest SSR
+
+  * repeat with different training and testing data (10 times)
+  
+* On average the value of alpha that gives lowest SSR from testing data is the final value.
+
+---
+
+class: center, middle
+
+## Decision trees aren't great with new data...
+
+## Many are better than one
 
 ---
 
@@ -515,21 +615,55 @@ knitr::include_graphics('img/SSR.PNG')
 .pull-left[
 
 * Grow many classification decision trees - **Many better than one**
-* Each tree classifies a pixel - it votes for that class, most votes is the winner
-* For each tree about 70% of the training data is used, 30% is left out of the bag (OOB)
-* Or bootstrap [re-sampling by replacement](https://andrewmaclachlan.github.io/CASA0005repo_20202021/gwr-and-spatially-lagged-regression.html) can be used also termed "bagging"
-* One tree uses the whole dataset
-* Variables used per tree varies - subset of variables (square root of all of them) is considered at each split of the tree
-
-
+  * Take our data and take bootstrap samples (same data can be picked many times) 
+  * Make decision tree from random number of variables (never all of them)
+  * Next at the node take a random subset of variables again = **RANDOM**
+  * Repeat!
 ]
 
 .pull-right[
+
+* We get many, many different trees = a **forest**
+* Run the data we have down the trees
+* Which option gets more votes based on all the trees
+
+
 ```{r echo=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics('img/random_forest.png')
 ```
 .small[Source:[Rosaria Silipo](https://towardsdatascience.com/from-a-single-decision-tree-to-a-random-forest-b9523be65147)
-]]
+]
+
+]
+---
+# Random Forests 2
+
+.pull-left[
+* Bootstrapping ([re-sampling by replacement](https://andrewmaclachlan.github.io/CASA0005repo_20202021/gwr-and-spatially-lagged-regression.html) data to make a decision = **bagging** 
+
+  * For each tree about 70% of the training data is used in the bootstrap, 30% is **left out of the bag (OOB)**
+
+  * Test the OOB data in the forest where all the trees didn't use it
+  
+  * Most votes wins!
+  
+  * Repeat for all OOB samples
+
+* proportion of OOB incorrectly classified = OOB error 
+
+]
+
+.pull-right[
+
+* Often the number of variables per tree is calculated from square root of variables in the original data.
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/science_direct_random_forest.jpg')
+```
+.small[Random Forest and overview. Source:[Science Direct](https://www.sciencedirect.com/topics/engineering/random-forest)
+]
+
+]
 
 ???
 
