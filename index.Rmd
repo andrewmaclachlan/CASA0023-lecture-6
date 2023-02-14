@@ -1221,6 +1221,69 @@ knitr::include_graphics('img/quadratic_transformation.png')
 ]
 
 ---
+# Support Vector Machine (SVM) 3
+
+Hyperparameters like **C** and **Gamma (or Sigma)** control SVM wiggle...
+
+In SVM we want to make sure each data set is on the correct side of a hyper plane
+
+It does so through:
+
+* Maximising the margin (the smallest residual)
+* Minimising classified points...**"soft margin"**
+
+Changing **C** changes the "slope" - consider more points
+
+```{r echo=FALSE, out.width='70%', fig.align='center'}
+knitr::include_graphics('img/changing_C.png')
+```
+.small[Source:[Lilly Chen](https://towardsdatascience.com/support-vector-machine-simply-explained-fee28eba5496)]
+
+
+---
+# Support Vector Machine (SVM) 4
+
+As noted, if we don't have linearly separable we can transform the data with the kernel trick
+
+....remember logging our data in linear regression?....similar idea...what is easier to separate...
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/quadratic_transformation.png')
+```
+.small[Source:[Drew Wilimitis](https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f#:~:text=The%20%E2%80%9Ctrick%E2%80%9D%20is%20that%20kernel,the%20data%20by%20these%20transformed)]
+
+---
+# Support Vector Machine (SVM) 5
+
+**only once we have transformed our data can we apply gamma**
+
+**Gamma** = controls the distance of influence of a training point...think back to CASA0005...min points in DBSCAN or weight matrix in spatial lag/error...
+
+  * Low value = lots of similarity 
+  
+  * High value = points near each other..
+  
+  
+```{r echo=FALSE, out.width='20%', fig.align='center'}
+knitr::include_graphics('img/gamma.png')
+```
+.small[Source:[Soner Yildirim](https://towardsdatascience.com/hyperparameter-tuning-for-support-vector-machines-c-and-gamma-parameters-6a5097416167)]
+
+---
+
+# Support Vector Machine (SVM) 6
+
+Q: how do we select the best values of **C** and **gamma**
+
+A: We test them **all** (or all the ones you want to) using grid search and compare them to our testing data...the ones that give the best accuracy are selected...
+
+```{r echo=FALSE, out.width='75%', fig.align='center'}
+knitr::include_graphics('img/grid_search.png')
+```
+.small[Source:[A Man Kumar](https://medium.com/@myselfaman12345/c-and-gamma-in-svm-e6cee48626be)]
+
+
+---
 class: inverse, center, middle
 
 # Some considerations...
@@ -1296,15 +1359,7 @@ knitr::include_graphics('img/blackbox.PNG')
 
 ```{r include=FALSE}
 library(xaringanBuilder)
-#build_pdf("index.html", complex_slides = TRUE)
+build_pdf("index.html", complex_slides = TRUE)
 ```
 
----
-# Papers
-
-https://gisgeography.com/image-classification-techniques-remote-sensing/
-
-https://www.researchgate.net/figure/Land-use-mapping-Maximum-Likehood-Classification-In-this-study-maximum-likelihood_fig1_263471542
-
-Read: https://www.tandfonline.com/doi/full/10.1080/01431160512331314083
 ---

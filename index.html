@@ -32,7 +32,7 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d4749e76fc6b403d819d25aaca3de6c7","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"cb31b57b5fd94a60abe1641938536387","expires":1}</script>
     <script src="libs/himalaya/himalaya.js"></script>
     <link href="libs/editable/editable.css" rel="stylesheet" />
     <script src="libs/editable/editable.js"></script>
@@ -1178,6 +1178,61 @@ Selectable:
 ]
 
 ---
+# Support Vector Machine (SVM) 3
+
+Hyperparameters like **C** and **Gamma (or Sigma)** control SVM wiggle...
+
+In SVM we want to make sure each data set is on the correct side of a hyper plane
+
+It does so through:
+
+* Maximising the margin (the smallest residual)
+* Minimising classified points...**"soft margin"**
+
+Changing **C** changes the "slope" - consider more points
+
+&lt;img src="img/changing_C.png" width="70%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Lilly Chen](https://towardsdatascience.com/support-vector-machine-simply-explained-fee28eba5496)]
+
+
+---
+# Support Vector Machine (SVM) 4
+
+As noted, if we don't have linearly separable we can transform the data with the kernel trick
+
+....remember logging our data in linear regression?....similar idea...what is easier to separate...
+
+&lt;img src="img/quadratic_transformation.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Drew Wilimitis](https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f#:~:text=The%20%E2%80%9Ctrick%E2%80%9D%20is%20that%20kernel,the%20data%20by%20these%20transformed)]
+
+---
+# Support Vector Machine (SVM) 5
+
+**only once we have transformed our data can we apply gamma**
+
+**Gamma** = controls the distance of influence of a training point...think back to CASA0005...min points in DBSCAN or weight matrix in spatial lag/error...
+
+  * Low value = lots of similarity 
+  
+  * High value = points near each other..
+  
+  
+&lt;img src="img/gamma.png" width="20%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Soner Yildirim](https://towardsdatascience.com/hyperparameter-tuning-for-support-vector-machines-c-and-gamma-parameters-6a5097416167)]
+
+---
+
+# Support Vector Machine (SVM) 6
+
+Q: how do we select the best values of **C** and **gamma**
+
+A: We test them **all** (or all the ones you want to) using grid search and compare them to our testing data...the ones that give the best accuracy are selected...
+
+&lt;img src="img/grid_search.png" width="75%" style="display: block; margin: auto;" /&gt;
+.small[Source:[A Man Kumar](https://medium.com/@myselfaman12345/c-and-gamma-in-svm-e6cee48626be)]
+
+
+---
 class: inverse, center, middle
 
 # Some considerations...
@@ -1241,14 +1296,6 @@ class: inverse, center, middle
 
 
 
----
-# Papers
-
-https://gisgeography.com/image-classification-techniques-remote-sensing/
-
-https://www.researchgate.net/figure/Land-use-mapping-Maximum-Likehood-Classification-In-this-study-maximum-likelihood_fig1_263471542
-
-Read: https://www.tandfonline.com/doi/full/10.1080/01431160512331314083
 ---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
