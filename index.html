@@ -32,7 +32,7 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"aeeaa2f62da041cc9564f1eb6f982d64","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d4749e76fc6b403d819d25aaca3de6c7","expires":1}</script>
     <script src="libs/himalaya/himalaya.js"></script>
     <link href="libs/editable/editable.css" rel="stylesheet" />
     <script src="libs/editable/editable.js"></script>
@@ -75,7 +75,7 @@ background-position: center
 
 ### Lecture 6: Classification
 
-### 02/02/2022 (updated: 08/02/2023)
+### 02/02/2022 (updated: 14/02/2023)
 
 <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#562457;overflow:visible;position:relative;"><path d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"/></svg> [a.maclachlan@ucl.ac.uk](mailto:a.maclachlan@ucl.ac.uk)
 <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#562457;overflow:visible;position:relative;"><path d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"/></svg> [andymaclachlan](https://twitter.com/andymaclachlan)
@@ -223,7 +223,7 @@ LULC transformation on air pollution, increase MAP (Major Air Pollutants) and LS
 
 --
 
-&gt; To figure out the impact of LULC on the LST and MAP (Major Air Pollutants) the following statistical comparison perform, the LULC was chosen as an independent variable whereas LST, PM₂.₅, SO₂, NO₂, CO, and O₃ are considered as dependent variables
+&gt; To figure out the impact of LULC on the LST and MAP (Major Air Pollutants) the following statistical comparison perform [summary stats - mean, min etc)], the LULC was chosen as an independent variable whereas LST, PM₂.₅, SO₂, NO₂, CO, and O₃ are considered as dependent variables
 
 
 Although this wasn't used in regression...that was just for the scatter plots of the variables...
@@ -233,26 +233,96 @@ But we have classified data (or we might) from a national center
   * no accuracy or method provided
 
 ---
+# Air pollution and LULC 3
+
+
+&lt;img src="img/summary_stats_fuldalu_21.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Fig. 3. Box-and-whisker plots between the LULC and the LST, PM₂.₅, SO₂, NO₂, CO, O₃. Source:[Fuldalu and Alta, 2021](https://www.sciencedirect.com/science/article/pii/S2212095521001887?casa_token=0kyJ1dZmkm0AAAAA:syu0WnpPpsCKiY6PiBfzkf2epGa5uldthCpOt1Hey9_pmOF_uel1WpuYECTvF0jr3uzcRCrbd5k#f0005)
+]
+
+---
+
+# Air pollution and LULC 4
+
+&lt;img src="img/regression_fuldalu_21.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Fig. 4. The Scatter-plot among the DEM, LST, PM₂.₅, SO₂, NO₂, CO, and O₃. Source:[Fuldalu and Alta, 2021](https://www.sciencedirect.com/science/article/pii/S2212095521001887?casa_token=0kyJ1dZmkm0AAAAA:syu0WnpPpsCKiY6PiBfzkf2epGa5uldthCpOt1Hey9_pmOF_uel1WpuYECTvF0jr3uzcRCrbd5k#f0005)
+]
+
+
+---
+
 
 # Urban green spaces
 
 &gt; Our results show that the techniques are hybrid methods (37 cases), followed by object-based image analysis (29 cases), land cover indices (20 cases) and fraction methods (16 cases) 
 
+.pull-left[
+**acronyms** 
+
 Inventory and assessment (Inv_Ass);Biomass and carbon (BC);Change detection (CD); Ecosystem services (ES):Overall UGSs mapping (OUGS);Species mapping (Spe);Three-dimensional modeling (TDM).
 
-&lt;img src="img/UGS.jpg" width="60%" style="display: block; margin: auto;" /&gt;
-.small[Fig. 2. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
+Google refers to Google Earth products; High spatial resolution (Hig); High spatial resolution &amp; Medium spatial resolution (Hig_Med); Hyperspectral (Hyp); LiDAR(Li); LiDAR &amp; High spatialresolution (Li_Hig); LiDAR &amp; Hyperspectral (Li_Hyp); Medium spatial resolution(Med).
+
+
+]
+
+.pull-right[
+&lt;img src="img/UGS.jpg" width="150%" style="display: block; margin: auto;" /&gt;
+.small[Fig. 4. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
+]
+ 
 
 ---
 
 # Urban green spaces 2
 
+Different sensors used for different mapping purposes, but can be mixed and matched (used intechangably)
+
 &lt;img src="img/UGS_objectives.jpg" width="75%" style="display: block; margin: auto;" /&gt;
-.small[Fig. 2. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
+.small[Fig. 5. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
 
 
 ---
-# Monitoring forests + illegal logging 3
+
+# Monitoring forests + illegal logging 
+
+.pull-left[
+* Leonardo Brito became chief of police at the Police Specialized in Crimes Against the Environment (DEMA) in Brazil’s Amapá stated, he noticed that the department hardly ever investigated environmental crimes
+
+* 2 employees, two vehicles, a boat and a drone, which collects only 20 minutes of footage at a time, to patrol an area of forest the size of Nepal.
+
+* PRODES and DETER = annual data or 250m resolution
+
+* Used [Global Forest Watch produced by Hansen et al. in GEE](https://developers.google.com/earth-engine/tutorials/tutorial_forest_01)
+
+]
+
+
+.pull-right[
+&lt;img src="img/Environmental-chief-police-Dema-Amapá-Leonardo-Brito.-Image-by-Dema-AP-1.jpg" width="75%" style="display: block; margin: auto;" /&gt;
+.small[[Environmental chief police Leonardo Brito and his team examine a deforested area. Image courtesy of DEMA-AP](https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/)]
+
+
+]
+
+---
+
+# Monitoring forests + illegal logging 
+
+* Uses the app version - Forest Watcher
+
+&gt; Brito said that since they starting using the app, Amapá’s environmental police have been able to detect 5,000 areas of deforestation in the state, both legal and illegal. He adds that every day he sees new locations to add to the ever-growing list.
+
+**Trying to clear small patches to avoid detection!**
+
+&lt;img src="img/drone02.png" width="60%" style="display: block; margin: auto;" /&gt;
+.small[[Image courtesy of DEMA-AP.](https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/)]
+
+
+---
+
+# Monitoring forests + illegal logging 
+
 
 &gt; "a more generalized feature space"
 
@@ -272,7 +342,7 @@ Inventory and assessment (Inv_Ass);Biomass and carbon (BC);Change detection (CD)
 ]
 ]
 ---
-# Monitoring forests + illegal logging 4
+# Monitoring forests + illegal logging 
 
 * Training data (in supervised machine learning)
 
@@ -284,7 +354,7 @@ Inventory and assessment (Inv_Ass);Biomass and carbon (BC);Change detection (CD)
 
 ---
 
-# Monitoring forests + illegal logging 5
+# Monitoring forests + illegal logging 
 
 * Classification (supervised or unsupervised)
 
@@ -309,7 +379,7 @@ Used in Brazil to [target illegal logging]( https://news.mongabay.com/2019/04/ho
   * **Sensor** Landsat TM 1984
   * vegetation, elevation, slope, aspect and road/ house proxmity = fire hazard map compared to burned map from Landsat
   * Did a weighted overlay of the layers - giving hazard value of 0 to 255, some layers had assigned values (e.g. aspect of 90-180 a value of 0)
-  * Vegetation was from a classified Landsat TM image - classified 16 categories 
+  * **Vegetation was from a classified Landsat TM image** - classified 16 categories 
   * No accuracy assessment
   * I assume the manually delineated the burned area pixels 
 ]
@@ -412,9 +482,21 @@ class: inverse, center, middle
 
 
 ### Population of 5.3 million
+
+--
+
 ### Median house price $1,116,219
+
+--
+
 ### Hemisphere: Southern
+
+--
+
 ### Continent: Australia 
+
+--
+
 ### Landmark: Opera house
 
 ---
@@ -431,8 +513,77 @@ class: center, middle
 ## You are fitting a model to some data which could be used for prediction...
 
 ---
+# Classification and regression trees (CART)
 
-# Decision and classification trees (CART)
+Comprised of
+
+.pull-left[
+
+**classification trees**
+
+* classify data into two or more discrete (can only have certain values) categories
+
+* For example, should you play golf today?
+  * temperature
+  * rainfall
+  * wind
+  * saturation 
+]
+.pull-right[
+**regression trees**
+
+* predict continuous dependent variable
+  * GCSE scores! the timeless example
+  * Linear regression does work as...not a linear relationship
+  * Large residuals
+
+]
+  
+---
+
+# Classification and regression trees (CART)
+
+* Classification tree
+
+&lt;img src="img/Decision_Tree_golf.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.small[Decision Tree - Classification. Source:[An Introduction to Data Science, Dr Saed Sayad](https://www.saedsayad.com/decision_tree.htm)
+]
+
+
+---
+
+# Classification and regression trees (CART)
+
+* Regression tree - subset the data into smaller chunks
+
+.pull-left[
+
+Linear regression doesn't fit
+
+&lt;img src="img/regression_tree_linear.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.small[How do Regression Trees Work?. Source:[Luka Beverin](https://medium.datadriveninvestor.com/how-do-regression-trees-work-94999c5105d)
+]
+
+]
+
+.pull-right[
+
+So...subset the data
+
+
+&lt;img src="img/regression_tree_linear_subset.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+.small[How do Regression Trees Work?. Source:[Luka Beverin](https://medium.datadriveninvestor.com/how-do-regression-trees-work-94999c5105d)
+]
+
+]
+
+
+---
+
+# Classification and regression trees (CART)
 
 * When we create a decision tree the final leaves might be a mixture of the categories = **impure**
 
@@ -669,7 +820,7 @@ class: center, middle
 we take the original dataset and select random data points from within it, but in order to keep it the same size as the original dataset some records are duplicated
 ---
 
-# Random Forests 2
+# Random Forests 3
 
 
 .pull-left[

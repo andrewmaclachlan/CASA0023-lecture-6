@@ -182,7 +182,7 @@ knitr::include_graphics('img/LST_honeycombing.jpg')
 
 --
 
-> To figure out the impact of LULC on the LST and MAP (Major Air Pollutants) the following statistical comparison perform, the LULC was chosen as an independent variable whereas LST, PM₂.₅, SO₂, NO₂, CO, and O₃ are considered as dependent variables
+> To figure out the impact of LULC on the LST and MAP (Major Air Pollutants) the following statistical comparison perform [summary stats - mean, min etc)], the LULC was chosen as an independent variable whereas LST, PM₂.₅, SO₂, NO₂, CO, and O₃ are considered as dependent variables
 
 
 Although this wasn't used in regression...that was just for the scatter plots of the variables...
@@ -192,30 +192,108 @@ But we have classified data (or we might) from a national center
   * no accuracy or method provided
 
 ---
+# Air pollution and LULC 3
+
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+  knitr::include_graphics('img/summary_stats_fuldalu_21.jpg')
+```
+.small[Fig. 3. Box-and-whisker plots between the LULC and the LST, PM₂.₅, SO₂, NO₂, CO, O₃. Source:[Fuldalu and Alta, 2021](https://www.sciencedirect.com/science/article/pii/S2212095521001887?casa_token=0kyJ1dZmkm0AAAAA:syu0WnpPpsCKiY6PiBfzkf2epGa5uldthCpOt1Hey9_pmOF_uel1WpuYECTvF0jr3uzcRCrbd5k#f0005)
+]
+
+---
+
+# Air pollution and LULC 4
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+  knitr::include_graphics('img/regression_fuldalu_21.jpg')
+```
+.small[Fig. 4. The Scatter-plot among the DEM, LST, PM₂.₅, SO₂, NO₂, CO, and O₃. Source:[Fuldalu and Alta, 2021](https://www.sciencedirect.com/science/article/pii/S2212095521001887?casa_token=0kyJ1dZmkm0AAAAA:syu0WnpPpsCKiY6PiBfzkf2epGa5uldthCpOt1Hey9_pmOF_uel1WpuYECTvF0jr3uzcRCrbd5k#f0005)
+]
+
+
+---
+
 
 # Urban green spaces
 
 > Our results show that the techniques are hybrid methods (37 cases), followed by object-based image analysis (29 cases), land cover indices (20 cases) and fraction methods (16 cases) 
 
+.pull-left[
+**acronyms** 
+
 Inventory and assessment (Inv_Ass);Biomass and carbon (BC);Change detection (CD); Ecosystem services (ES):Overall UGSs mapping (OUGS);Species mapping (Spe);Three-dimensional modeling (TDM).
 
-```{r echo=FALSE, out.width='60%', fig.align='center'}
+Google refers to Google Earth products; High spatial resolution (Hig); High spatial resolution & Medium spatial resolution (Hig_Med); Hyperspectral (Hyp); LiDAR(Li); LiDAR & High spatialresolution (Li_Hig); LiDAR & Hyperspectral (Li_Hyp); Medium spatial resolution(Med).
+
+
+]
+
+.pull-right[
+```{r echo=FALSE, out.width='150%', fig.align='center'}
 knitr::include_graphics('img/UGS.jpg')
 ```
-.small[Fig. 2. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
+.small[Fig. 4. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
+]
+ 
 
 ---
 
 # Urban green spaces 2
 
+Different sensors used for different mapping purposes, but can be mixed and matched (used intechangably)
+
 ```{r echo=FALSE, out.width='75%', fig.align='center'}
 knitr::include_graphics('img/UGS_objectives.jpg')
 ```
-.small[Fig. 2. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
+.small[Fig. 5. Different techniques to characterize UGSs: (a) frequency of use of techniques according to type of remotely-sensed data, and (b) frequency of use of techniques according to application area. Source:[Shahtahmassebi et al. 2021](https://www.sciencedirect.com/science/article/pii/S1618866720307639?casa_token=ZrACATZktIAAAAAA:9bCBg0pBWBsIPmYMufywYK54cyPXoImsgNxQCN_JBR2zUQ50mvnKHcKZ9CnB2ywCNNsOCw-tpBU#!)]
 
 
 ---
-# Monitoring forests + illegal logging 3
+
+# Monitoring forests + illegal logging 
+
+.pull-left[
+* Leonardo Brito became chief of police at the Police Specialized in Crimes Against the Environment (DEMA) in Brazil’s Amapá stated, he noticed that the department hardly ever investigated environmental crimes
+
+* 2 employees, two vehicles, a boat and a drone, which collects only 20 minutes of footage at a time, to patrol an area of forest the size of Nepal.
+
+* PRODES and DETER = annual data or 250m resolution
+
+* Used [Global Forest Watch produced by Hansen et al. in GEE](https://developers.google.com/earth-engine/tutorials/tutorial_forest_01)
+
+]
+
+
+.pull-right[
+```{r echo=FALSE, out.width='75%', fig.align='center'}
+knitr::include_graphics('img/Environmental-chief-police-Dema-Amapá-Leonardo-Brito.-Image-by-Dema-AP-1.jpg')
+```
+.small[[Environmental chief police Leonardo Brito and his team examine a deforested area. Image courtesy of DEMA-AP](https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/)]
+
+
+]
+
+---
+
+# Monitoring forests + illegal logging 
+
+* Uses the app version - Forest Watcher
+
+> Brito said that since they starting using the app, Amapá’s environmental police have been able to detect 5,000 areas of deforestation in the state, both legal and illegal. He adds that every day he sees new locations to add to the ever-growing list.
+
+**Trying to clear small patches to avoid detection!**
+
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('img/drone02.png')
+```
+.small[[Image courtesy of DEMA-AP.](https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/)]
+
+
+---
+
+# Monitoring forests + illegal logging 
+
 
 > "a more generalized feature space"
 
@@ -239,7 +317,7 @@ knitr::include_graphics('img/Spectral-curves-scatter-plot.png')
 ]
 ]
 ---
-# Monitoring forests + illegal logging 4
+# Monitoring forests + illegal logging 
 
 * Training data (in supervised machine learning)
 
@@ -253,7 +331,7 @@ knitr::include_graphics('img/training_data.png')
 
 ---
 
-# Monitoring forests + illegal logging 5
+# Monitoring forests + illegal logging 
 
 * Classification (supervised or unsupervised)
 
@@ -280,7 +358,7 @@ Used in Brazil to [target illegal logging]( https://news.mongabay.com/2019/04/ho
   * **Sensor** Landsat TM 1984
   * vegetation, elevation, slope, aspect and road/ house proxmity = fire hazard map compared to burned map from Landsat
   * Did a weighted overlay of the layers - giving hazard value of 0 to 255, some layers had assigned values (e.g. aspect of 90-180 a value of 0)
-  * Vegetation was from a classified Landsat TM image - classified 16 categories 
+  * **Vegetation was from a classified Landsat TM image** - classified 16 categories 
   * No accuracy assessment
   * I assume the manually delineated the burned area pixels 
 ]
@@ -393,9 +471,21 @@ class: inverse, center, middle
 
 
 ### Population of 5.3 million
+
+--
+
 ### Median house price $1,116,219
+
+--
+
 ### Hemisphere: Southern
+
+--
+
 ### Continent: Australia 
+
+--
+
 ### Landmark: Opera house
 
 ---
@@ -412,8 +502,83 @@ class: center, middle
 ## You are fitting a model to some data which could be used for prediction...
 
 ---
+# Classification and regression trees (CART)
 
-# Decision and classification trees (CART)
+Comprised of
+
+.pull-left[
+
+**classification trees**
+
+* classify data into two or more discrete (can only have certain values) categories
+
+* For example, should you play golf today?
+  * temperature
+  * rainfall
+  * wind
+  * saturation 
+]
+.pull-right[
+**regression trees**
+
+* predict continuous dependent variable
+  * GCSE scores! the timeless example
+  * Linear regression does work as...not a linear relationship
+  * Large residuals
+
+]
+  
+---
+
+# Classification and regression trees (CART)
+
+* Classification tree
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/Decision_Tree_golf.png')
+```
+
+.small[Decision Tree - Classification. Source:[An Introduction to Data Science, Dr Saed Sayad](https://www.saedsayad.com/decision_tree.htm)
+]
+
+
+---
+
+# Classification and regression trees (CART)
+
+* Regression tree - subset the data into smaller chunks
+
+.pull-left[
+
+Linear regression doesn't fit
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/regression_tree_linear.png')
+```
+
+.small[How do Regression Trees Work?. Source:[Luka Beverin](https://medium.datadriveninvestor.com/how-do-regression-trees-work-94999c5105d)
+]
+
+]
+
+.pull-right[
+
+So...subset the data
+
+
+```{r echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics('img/regression_tree_linear_subset.png')
+```
+
+.small[How do Regression Trees Work?. Source:[Luka Beverin](https://medium.datadriveninvestor.com/how-do-regression-trees-work-94999c5105d)
+]
+
+]
+
+
+---
+
+# Classification and regression trees (CART)
 
 * When we create a decision tree the final leaves might be a mixture of the categories = **impure**
 
@@ -670,7 +835,7 @@ knitr::include_graphics('img/science_direct_random_forest.jpg')
 we take the original dataset and select random data points from within it, but in order to keep it the same size as the original dataset some records are duplicated
 ---
 
-# Random Forests 2
+# Random Forests 3
 
 
 .pull-left[
@@ -1131,7 +1296,7 @@ knitr::include_graphics('img/blackbox.PNG')
 
 ```{r include=FALSE}
 library(xaringanBuilder)
-build_pdf("index.html", complex_slides = TRUE)
+#build_pdf("index.html", complex_slides = TRUE)
 ```
 
 ---
