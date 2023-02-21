@@ -812,38 +812,89 @@ We can either:
 * limit how trees grow (e.g. a minimum number of pixels in a leaf, 20 is often used)
 
 * Weakest link pruning (with tree score):
-  * calculate the sum of the squared residuals (SSR, like linear regression) for each leaf (final decision)
   * use one less leaf, remove a leaf = **sub-tree**, SSR will get larger = **termed PRUNING or cost complexity pruning**
   * Sum for the tree
-  * Tree score = SSR + tree penalty (alpha) * T (number of leaves) 
+  * Tree score = SSR + tree penalty (alpha) * T (number of leaves)...lower better..
 
 ---
 
 # Overfitting 3
 
+We are changing two things here:
+
+
 .pull-left[
 
-* [Alpha](https://youtu.be/D0efHEJsfHo?t=684): use a full size regression tree (with **all** data), start with a value of 0 (this will give lowest value of tree score) then increase **until pruning** (removing a leaf) gives lower **tree score**...select all these values...then...
+* The **number of leaves in each tree**...
+  * We keep removing a leaves
 
-  * Go back to all the data
-  * Divide the data into training and testing data
-  * Take training data and use alpha values from before
-  * Calculate the SSR using the testing data...which alpha has the smallest SSR
-  *  repeat with different training and testing data (10 times)
 
 
 ]
 
 .pull-right[
 
-* On average the value of alpha that gives lowest SSR from testing data is the final value.
+* Changing [Alpha](https://youtu.be/D0efHEJsfHo?t=684)
+  * use a full size regression tree (with **all** data)
+  * start with a value of 0 (this will give lowest value of tree score) 
+  * then increase **until pruning** (removing a leaf) gives lower **tree score**
+  * save those alpha values
 
-```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('img/decision_tree_prune.PNG')
+]
+
+---
+# Overfitting 4
+
+* Different values of alpha give us give different sub trees and tree scores...
+
+* Tree score = SSR + tree penalty (alpha) * T (number of leaves) 
+
+* In the image below we get a lower tree score with the new alpha and removing the leaves...
+
+```{r echo=FALSE, out.width='75%', fig.align='center'}
+knitr::include_graphics('img/alpha.png')
 ```
-.small[From 11:18. Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
+.small[From 12:56. Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)]
+
+
+---
+# Overfitting 5
+
+.pull-left[
+
+  * Go back to all the data
+  * Divide the data into training (70%) and testing data (30%)
+  
+  * Take **training data and use alpha values from before**
+  * Each alpha will be made into a new tree with this new data
 ]
-]
+
+.pull-right[
+
+* Take each tree
+  * Place the **testing data within the divisions** based on the different trees
+  * Calculate the SSR with the test data (testing data bold, train light)
+  * Which tree has the smallest SSR
+
+]  
+
+
+```{r echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics('img/SSR_testing.png')
+```
+.small[From 14:08. Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)]
+
+---
+
+# Overfitting 6
+
+* Repeat previous slide with different training and testing data (10 times cross validation)
+
+* On average from the *10 tests* the value of alpha that gives lowest SSR from testing data is the final value.
+
+* Select the tree from that used the full data with that alpha!
+
+
 ---
 
 class: center, middle
@@ -1539,5 +1590,3 @@ knitr::include_graphics('img/blackbox.PNG')
 library(xaringanBuilder)
 build_pdf("index.html", complex_slides = TRUE)
 ```
-
----
