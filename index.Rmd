@@ -162,7 +162,7 @@ knitr::include_graphics('img/urban_area.png')
 * Sentinel-3 Sea and Land Surface Temperature
 * Sentinel-5 Precursor Major Air Pollutants
 
-LULC transformation on air pollution, increase MAP (Major Air Pollutants) and LST 
+Question: LULC transformation on air pollution, increase MAP (Major Air Pollutants) and LST 
 
 * Used regression...
 
@@ -178,7 +178,7 @@ knitr::include_graphics('img/LST_honeycombing.jpg')
 # Air pollution and LULC 2
 
 
-> There is no doubt that the LULC distribution significantly affects the MAP and LST. Therefore, to determine this relationship the latest LULC distribution shape-file was acquired from the National Cartographic Center of Iran (NCC)
+> There is no doubt that the LULC distribution significantly affects the MAP and LST. Therefore, to determine this relationship **the latest LULC distribution shape-file was acquired from the National Cartographic Center of Iran (NCC)**
 
 --
 
@@ -289,6 +289,44 @@ knitr::include_graphics('img/drone02.png')
 ```
 .small[[Image courtesy of DEMA-AP.](https://news.mongabay.com/2019/04/how-a-sheriff-in-brazil-is-using-satellites-to-stop-deforestation/)]
 
+
+---
+
+# Monitoring forests + illegal logging 
+
+[Hansen, M.C., Potapov, P.V., Moore, R., Hancher, M., Turubanova, S.A., Tyukavina, A., Thau, D., Stehman, S.V., Goetz, S.J., Loveland, T.R., Kommareddy, A., Egorov, A., Chini, L., Justice, C.O., Townshend, J.R.G., 2013. High-Resolution Global Maps of 21st-Century Forest Cover Change. Science 342, 850–853.]( https://doi.org/10.1126/science.1244693)
+
+
+**Sensor**
+
+* Landsat (2000 to 2012)
+
+Monitoring forest loss and illegal logging 
+
+* Pre-processing
+
+> "Landsat pre-processing steps included: (i) image resampling, (ii) conversion of raw
+digital values (DN) to top of atmosphere (TOA) reflectance, (iii) cloud/shadow/water
+screening and quality assessment (QA), and (iv) image normalization"
+
+> The stack of QA layers was used to create a perpixel set of cloud-free image observations which in turn was employed to calculate timeseries spectral metrics.
+
+---
+
+# Monitoring forests + illegal logging 
+
+* Creating metrics
+
+> Metrics represent a generic feature space that facilitates regionalscale mapping and have been used extensively with MODIS and AVHRR data
+
+> (i) reflectance values representing maximum, minimum and selected percentile values 
+  (ii) mean reflectance values for observations between selected percentiles
+  (iii) slope of linear regression of band reflectance value versus
+image date.
+
+In support of this reference is given to [Hansen et al. 2010](https://www.pnas.org/doi/epdf/10.1073/pnas.0912668107)...supplementary material...
+
+> The time-sequential MODIS 32-dayinputs were transformed to annual metrics to produce a more generalized feature space
 
 ---
 
@@ -490,6 +528,12 @@ class: inverse, center, middle
 
 ---
 
+class: center, middle, inverse
+
+## Some machine learning methods...
+
+---
+
 class: center, middle
 
 
@@ -502,6 +546,15 @@ class: center, middle
 ## You are fitting a model to some data which could be used for prediction...
 
 ---
+
+class: center, middle, inverse
+
+## Classification and regression trees (CART)
+
+### classification
+
+---
+
 # Classification and regression trees (CART)
 
 Comprised of
@@ -510,7 +563,7 @@ Comprised of
 
 **classification trees**
 
-* classify data into two or more discrete (can only have certain values) categories
+* classify data into two or more **discrete (can only have certain values) categories**
 
 * For example, should you play golf today?
   * temperature
@@ -521,7 +574,7 @@ Comprised of
 .pull-right[
 **regression trees**
 
-* predict continuous dependent variable
+* predict **continuous dependent variable**
   * GCSE scores! the timeless example
   * Linear regression does work as...not a linear relationship
   * Large residuals
@@ -578,6 +631,12 @@ knitr::include_graphics('img/regression_tree_linear_subset.png')
 
 ---
 
+class: center, middle, inverse
+
+## But how far (deep) do we run a decision tree...what if the leaf has mixed results
+
+---
+
 # Classification and regression trees (CART)
 
 * When we create a decision tree the final leaves might be a mixture of the categories = **impure**
@@ -616,7 +675,7 @@ knitr::include_graphics('img/decision_tree2.PNG')
 * If we have a yes and no we phrase this an impure leaf...and we quantify this with the Gini Impurity
 
 ```{r echo=FALSE, out.width='100%', fig.align='center'}
-knitr::include_graphics('img/decision_tree3.PNG')
+knitr::include_graphics('img/decision_tree3.png')
 ```
 .small[Source:[StatQuest](https://www.youtube.com/watch?v=_L39rN6gz7Y)
 ]
@@ -632,10 +691,10 @@ Gini impurity for popcorn = true is 0.375 vs false is 0.444
 
 But they have different numbers of people, so we take weighted average for the variable...
 
-weight for left = people in leaf (4) / total in both leaves (7) * impurity (0.375) 
-weight for right = people in leaf (3) / total in both leaves (7) * impurity (0.444) 
+weight for left = $people in leaf (4) / total in both leaves (7) * impurity (0.375)$ 
+weight for right = $people in leaf (3) / total in both leaves (7) * impurity (0.444)$ 
 
-Add together, so impurity for loves popcorn is 0.405
+**Add together**, so impurity for loves popcorn is 0.405 
 
 **lowest impurity wins**
 
@@ -646,6 +705,13 @@ class: inverse, center, middle
 
 # Someone new comes along ...run them (or the data) through the tree
 
+---
+
+class: inverse, center, middle
+
+## Classification and regression trees (CART)
+
+### regression
 ---
 
 # Regression trees 
@@ -697,16 +763,22 @@ To prevent over fitting we can set **a minimum number of observations before spl
  
 ---
 
-# Regression trees 2
+# Regression trees 
+
+* Move to each point on the x axis > calculate the average > use this average as a new threshold and get the SSR.
+
+* Use the threshold that gives smallest SSR
+
+* Repeat for the remaining sections....
 
 ```{r echo=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics('img/SSR.PNG')
 ```
-.small[Source:[StatQuest](https://www.youtube.com/watch?v=g9c66TUylZ4)
+.small[See from 10:56. Source:[StatQuest](https://www.youtube.com/watch?v=g9c66TUylZ4)
 ]
 ---
 
-# Regression trees 3
+# Regression trees 
 
 * We can do this with many predictor variables...we try different thresholds and calculate the sum of squared residuals (SSR) - e.g. age or gender
 
@@ -1359,7 +1431,7 @@ knitr::include_graphics('img/blackbox.PNG')
 
 ```{r include=FALSE}
 library(xaringanBuilder)
-build_pdf("index.html", complex_slides = TRUE)
+#build_pdf("index.html", complex_slides = TRUE)
 ```
 
 ---
