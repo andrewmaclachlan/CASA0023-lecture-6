@@ -32,7 +32,7 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xa38f04e968543faae07ed0fd3ddc0d5","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x02ca075dd654d62aada092ba3f63d5b","expires":1}</script>
     <script src="libs/himalaya/himalaya.js"></script>
     <link href="libs/editable/editable.css" rel="stylesheet" />
     <script src="libs/editable/editable.js"></script>
@@ -802,9 +802,9 @@ What if we have a leaf with just one person or one pixel value?  = **overfitting
 We can either:
 * limit how trees grow (e.g. a minimum number of pixels in a leaf, 20 is often used)
 
-* Weakest link pruning:
+* Weakest link pruning (with tree score):
   * calculate the sum of the squared residuals (SSR, like linear regression) for each leaf (final decision)
-  * use one less leaf, remove a leaf = **sub-tree**, SSR will get larger = **PRUNE**
+  * use one less leaf, remove a leaf = **sub-tree**, SSR will get larger = **termed PRUNING or cost complexity pruning**
   * Sum for the tree
   * Tree score = SSR + tree penalty (alpha) * T (number of leaves) 
 
@@ -812,20 +812,27 @@ We can either:
 
 # Overfitting 3
 
-&lt;img src="img/decision_tree_prune.PNG" width="45%" style="display: block; margin: auto;" /&gt;
-.small[Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
+.pull-left[
+
+* [Alpha](https://youtu.be/D0efHEJsfHo?t=684): use a full size regression tree (with **all** data), start with a value of 0 (this will give lowest value of tree score) then increase **until pruning** (removing a leaf) gives lower **tree score**...select all these values...then...
+
+  * Go back to all the data
+  * Divide the data into training and testing data
+  * Take training data and use alpha values from before
+  * Calculate the SSR using the testing data...which alpha has the smallest SSR
+  *  repeat with different training and testing data (10 times)
+
+
 ]
 
-* [Alpha](https://youtu.be/D0efHEJsfHo?t=684): use a full size regression tree (with **all** data), start with a value of 0 then increase **until pruning** (removing a leaf) gives lower **tree score** .
+.pull-right[
 
-  * Divide the data into training and testing data using the alpha values from before
-
-  * Calculate the SSR using the testing data...which alpha has the smallest SSR
-
-  * repeat with different training and testing data (10 times)
-  
 * On average the value of alpha that gives lowest SSR from testing data is the final value.
 
+&lt;img src="img/decision_tree_prune.PNG" width="100%" style="display: block; margin: auto;" /&gt;
+.small[From 11:18. Source:[StatQuest](https://www.youtube.com/watch?v=D0efHEJsfHo)
+]
+]
 ---
 
 class: center, middle
@@ -975,14 +982,16 @@ class: inverse, center, middle
 # Unsupervised 
 
 
-Usually referred to as clustering / also k-means:
+Usually referred to as **clustering / also k-means**:
+
+**remember DBSCAN** - [radius(Epsilon) and min points(for the cluster)...](https://andrewmaclachlan.github.io/CASA0005repo/detecting-spatial-patterns.html#density-based-spatial-clustering-of-applications-with-noise-dbscan) 
 
 * Place points randomly or uniformly across spectral feature space or across the first PCA
   * Set the radius in spectral feature space at which new cluster to new started 
   * Spectral distance to merge (within they are the same)
   * Number of pixels to be considered before merging
   * Max number of clusters
-  * Clusters migrate over time - see Jensen page 404.
+  * Clusters migrate over time - [see Jensen page 403/404](https://read.kortext.com/reader/pdf/1872407/403).
   
 Repeat until N iterations or no allocations of pixels left.
 
@@ -1165,8 +1174,9 @@ An approach to select a classifier...in most cases training samples will overlap
 
 * From histogram to probability density function
   * mean and standard deviation of training data
-* In imagery this is *n* dimensional multivariate normal density function - see Jensen p.399 for equation. 
+* In imagery this is *n* dimensional multivariate normal density function - see [Jensen p.399 for equation](https://read.kortext.com/reader/pdf/1872407/399). 
 * Each pixel from image data is passed to the maximum likelihood rule &gt; assigns landover to the largest product.
+* **The key is it is based on probability...the data (landcover) most probably to have the values in our pixel**
 
 
 
@@ -1204,9 +1214,9 @@ class: inverse, center, middle
 
 * Simply a linear binary classifier - like logistic regression! 
 
-* Maximum **margin** between two classes of training data
+* Maximum **margin** between two classes of training data = **maximum margin classifier**
 
-* Points on the boundaries are **support vectors**
+* Points on the boundaries (and within) are **support vectors**
 
 * Middle margin is called the **separating hyperplane**
 
@@ -1222,7 +1232,50 @@ This can be thought of as training data for class a on one side and training dat
 
 ---
 
-# Support Vector Machine (SVM) 2
+# Support Vector Machine (SVM)
+
+.pull-left[
+
+* Maximum **margin** between two classes of training data = **maximum margin classifier**
+
+* This means it finds the divide in the data (e.g. classes) and places a line at the division from the closest points...
+
+* But what if we have a green point close to the blue points?
+
+]
+
+.pull-right[
+&lt;img src="img/max_margin.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[skilltohire](https://medium.com/@skilltohire/support-vector-machines-4d28a427ebd)]
+
+]
+
+---
+
+# Support Vector Machine (SVM)
+
+.pull-left[
+
+* **soft margin** = allow some misclassificaitons to occur
+
+* We use cross validation to know how many misclassifications to allow
+
+* Aim is to get best classification....whilst allowing some wrongly classified points
+
+* More than 2 datasets we go into 3D and use a **plane** not a **line**
+]
+
+.pull-right[
+&lt;img src="img/3D_SVM.png" width="100%" style="display: block; margin: auto;" /&gt;
+.small[Source:[Aditri Srivastava](https://medium.com/analytics-vidhya/support-vector-machines-svm-87841ab63b8)]
+
+
+
+]
+
+---
+
+# Support Vector Machine (SVM)
 
 .pull-left[
 
@@ -1239,18 +1292,18 @@ Selectable:
   
 .pull-right[
 
-* If they aren't linearly separable we can transform the data with the **kernel trick**
+* If they aren't linearly separable we can transform the data with the **kernel trick** - remember regression logging in CASA0005!
   * Apply some function to make them linearly separable 
 
 
-&lt;img src="img/kernel_trick.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/kernel_trick.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="img/quadratic_transformation.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/quadratic_transformation.png" width="80%" style="display: block; margin: auto;" /&gt;
 .small[Source:[Drew Wilimitis](https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f#:~:text=The%20%E2%80%9Ctrick%E2%80%9D%20is%20that%20kernel,the%20data%20by%20these%20transformed)]
 ]
 
 ---
-# Support Vector Machine (SVM) 3
+# Support Vector Machine (SVM) 
 
 Hyperparameters like **C** and **Gamma (or Sigma)** control SVM wiggle...
 
@@ -1259,7 +1312,7 @@ In SVM we want to make sure each data set is on the correct side of a hyper plan
 It does so through:
 
 * Maximising the margin (the smallest residual)
-* Minimising classified points...**"soft margin"**
+* Minimising misclassified points...**"soft margin"**
 
 Changing **C** changes the "slope" - consider more points
 
@@ -1268,7 +1321,7 @@ Changing **C** changes the "slope" - consider more points
 
 
 ---
-# Support Vector Machine (SVM) 4
+# Support Vector Machine (SVM) 
 
 As noted, if we don't have linearly separable we can transform the data with the kernel trick
 
@@ -1278,15 +1331,15 @@ As noted, if we don't have linearly separable we can transform the data with the
 .small[Source:[Drew Wilimitis](https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f#:~:text=The%20%E2%80%9Ctrick%E2%80%9D%20is%20that%20kernel,the%20data%20by%20these%20transformed)]
 
 ---
-# Support Vector Machine (SVM) 5
+# Support Vector Machine (SVM) 
 
 **only once we have transformed our data can we apply gamma**
 
 **Gamma** = controls the distance of influence of a training point...think back to CASA0005...min points in DBSCAN or weight matrix in spatial lag/error...
 
-  * Low value = lots of similarity 
+  * Low value = lots of similarity (top)
   
-  * High value = points near each other..
+  * High value = points near each other (bottom)
   
   
 &lt;img src="img/gamma.png" width="20%" style="display: block; margin: auto;" /&gt;
@@ -1294,7 +1347,7 @@ As noted, if we don't have linearly separable we can transform the data with the
 
 ---
 
-# Support Vector Machine (SVM) 6
+# Support Vector Machine (SVM) 
 
 Q: how do we select the best values of **C** and **gamma**
 
@@ -1302,6 +1355,27 @@ A: We test them **all** (or all the ones you want to) using grid search and comp
 
 &lt;img src="img/grid_search.png" width="75%" style="display: block; margin: auto;" /&gt;
 .small[Source:[A Man Kumar](https://medium.com/@myselfaman12345/c-and-gamma-in-svm-e6cee48626be)]
+
+
+---
+
+# Support Vector Machine (SVM) 
+
+&gt; Many models have hyperparameters that can’t be learned directly from a single data set when training the model
+
+This means you might have to test the hyperparameters after model training / run the model several times
+
+However, in [tidymodels](https://www.tidymodels.org/learn/work/tune-svm/)...
+
+&gt; Instead, **we can train many models in a grid of possible hyperparameter values and see which ones turn out best**.
+
+
+```r
+svm_mod &lt;-
+  svm_rbf(cost = tune(), rbf_sigma = tune()) %&gt;%
+  set_mode("classification") %&gt;%
+  set_engine("kernlab")
+```
 
 
 ---
@@ -1356,6 +1430,19 @@ class: inverse, center, middle
 ## This stems from simple linear iterative clustering (SLIC)...which uses k-means clustering to create the superpixels. See [Achanta et al. (2012)](https://pubmed.ncbi.nlm.nih.gov/22641706/)
 
 ---
+# A warning....
+
+&gt; Often classifiers on EO data can over complicate things...
+
+&gt; If there is a clear divide between bands do we need a classifier? 
+
+&gt; Can we just threshold the data?
+
+--
+
+Yes! But then if we get new data it might not work as well?
+
+---
 # Blackbox?
 
 &lt;img src="img/blackbox.PNG" width="70%" style="display: block; margin: auto;" /&gt;
@@ -1365,6 +1452,20 @@ class: inverse, center, middle
 
 # Summary 
 
+* What do we need a classification for? Landcover? Estimating values (e.g. GCSE scores or pollution)
+
+* Different classification methods are essentially just slicing the data in different ways
+
+* Often they can be made to appear more complicated than they are.
+
+* We have data and we want to subset it into classes (or vales)
+
+* Do we want a:
+  * Single tree
+  * A forest
+  * Or a decision hyperplane boundary in 3D (or more e.g. 10 variables will be 10D)
+
+* What rules (hyperparameters) do we use to control the classifier...
 
 
 
