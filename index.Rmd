@@ -679,6 +679,8 @@ knitr::include_graphics('img/decision_tree3.png')
 ```
 .small[Source:[StatQuest](https://www.youtube.com/watch?v=_L39rN6gz7Y)
 ]
+**lowest impurity wins**
+
 ]
 
 
@@ -691,12 +693,12 @@ Gini impurity for popcorn = true is 0.375 vs false is 0.444
 
 But they have different numbers of people, so we take weighted average for the variable...
 
-weight for left = $people in leaf (4) / total in both leaves (7) * impurity (0.375)$ 
-weight for right = $people in leaf (3) / total in both leaves (7) * impurity (0.444)$ 
+weight for left 
+$$people in leaf (4) / total in both leaves (7) * impurity (0.375)$$ 
+weight for right
+$$people in leaf (3) / total in both leaves (7) * impurity (0.444)$$ 
 
 **Add together**, so impurity for loves popcorn is 0.405 
-
-**lowest impurity wins**
 
 ]
 ---
@@ -796,16 +798,35 @@ What if we have a leaf with just one person or one pixel value?  = **overfitting
 
 * Bias = difference between predicted value and true value = oversimplifies model
 
+> inability to capture true relationship (poor fitting line) - Sum of Square Residuals(SSR) between train and test
+> ...loosely speaking, is how far away the average prediction is from the actual average (difference of means)
+
 * Variance = variability of model for a given point = does not genearlise well
 
-```{r echo=FALSE, out.width='100%', fig.align='center'}
+> difference between train fit and test fit
+> ...the SSR will be massively different between train and test
+
+```{r echo=FALSE, out.width='65%', fig.align='center'}
 knitr::include_graphics('img/bias.png')
 ```
 .small[Source:[Seema Singh](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)]
 
+.small[Source:[Data science stack exchange](https://datascience.stackexchange.com/questions/10849/what-are-the-relationships-differences-between-bias-variance-and-residuals#:~:text=A%20residual%20is%20a%20specific,the%20difference%20of%20the%20means.)]
+---
+# Overfitting
+
+**best model**
+
+* low bias = model the real relationship 
+
+* low variability = consistent predictions between datasets (e.g. test and train)
+
+```{r echo=FALSE, out.width='65%', fig.align='center'}
+knitr::include_graphics('img/Model-fitting-errors-Variance-is-the-variability-distance-from-the-target-center-of.png')
+```
+.small[Source:[Bellini and Cascella, 2022](https://www.researchgate.net/publication/364826401_Understanding_basic_principles_of_Artificial_Intelligence_a_practical_guide_for_intensivists)]
 
 ---
-
 # Overfitting 2
 
 We can either:
@@ -866,7 +887,8 @@ knitr::include_graphics('img/alpha.png')
   * Divide the data into training (70%) and testing data (30%)
   
   * Take **training data and use alpha values from before**
-  * Each alpha will be made into a new tree with this new data
+  * Each alpha will be made into a **new tree** with this new data to minimise the tree score
+  * Higher alpha values will mean we must remove leaves...
 ]
 
 .pull-right[
@@ -892,7 +914,9 @@ knitr::include_graphics('img/SSR_testing.png')
 
 * On average from the *10 tests* the value of alpha that gives lowest SSR from testing data is the final value.
 
-* Select the tree from that used the full data with that alpha!
+* Select the tree that used the full data with that alpha! (slide overfitting 3!).
+
+**Note** for classification trees we replace SSR with the impurity measure (e.g, here Gini impurity)
 
 
 ---
@@ -1376,7 +1400,7 @@ knitr::include_graphics('img/3D_SVM.png')
 .pull-left[
 
 * Underlying theory is **structural risk minimisation**
-  * Minimise error on unseen data with no assumptions on the distribution 
+  * Minimise error on unseen data with **no assumptions on the distribution**
   
 Selectable:
 * [Type of kernel](https://www.geeksforgeeks.org/major-kernel-functions-in-support-vector-machine-svm/)
@@ -1479,6 +1503,7 @@ However, in [tidymodels](https://www.tidymodels.org/learn/work/tune-svm/)...
 
 ```{r, eval=FALSE}
 svm_mod <-
+# tune = tunes hyperparameters of statistical methods using a grid search over supplied parameter ranges.
   svm_rbf(cost = tune(), rbf_sigma = tune()) %>%
   set_mode("classification") %>%
   set_engine("kernlab")
