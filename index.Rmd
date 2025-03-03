@@ -19,7 +19,7 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
-```{r xaringan-all, echo=FALSE}
+```{r xaringan-all, echo=FALSE, warning=FALSE}
 library(countdown)
 library(xaringan)
 library(xaringanExtra)
@@ -73,6 +73,7 @@ library(fontawesome)
 ### 02/02/2022 (updated: `r format(Sys.time(), "%d/%m/%Y")`)
 
 `r fa("paper-plane", fill = "#562457")` [a.maclachlan@ucl.ac.uk](mailto:a.maclachlan@ucl.ac.uk)
+`r fa("globe", fill = "#562457")` [andymac.uk](https://www.andymac.uk/)
 `r fa("twitter", fill = "#562457")` [andymaclachlan](https://twitter.com/andymaclachlan)
 `r fa("github", fill = "#562457")` [andrewmaclachlan](https://github.com/andrewmaclachlan)
 `r fa("location-dot", fill = "#562457")` [Centre for Advanced Spatial Analysis, UCL](https://www.ucl.ac.uk/bartlett/casa/)
@@ -767,7 +768,7 @@ To prevent over fitting we can set **a minimum number of observations before spl
 
 # Regression trees 
 
-* Move to each point on the x axis > calculate the average > use this average as a new threshold and get the SSR.
+* Move to each point on the x axis > calculate the average (between x points) > use this average as a new threshold and get the SSR.
 
 * Use the threshold that gives smallest SSR
 
@@ -787,6 +788,10 @@ knitr::include_graphics('img/SSR.PNG')
 * The best sum of squared residuals (SSR) value **across all variables becomes the root**. 
 
 * Each predictor is then used in the process based on lowest sum of squared residuals (SSR)
+
+* Can further split observations into groups again with SSR
+
+  * Only split observations with **min number of 20**.
 
 * Each leaf **is a numeric value** not category like in classification trees. 
 
@@ -1611,7 +1616,10 @@ knitr::include_graphics('img/blackbox.PNG')
 
 * What rules (hyperparameters) do we use to control the classifier...
 
-```{r include=FALSE}
-library(xaringanBuilder)
-build_pdf("index.html", complex_slides = TRUE)
+```{r include=FALSE, eval=FALSE}
+library(renderthis)
+# options(timeout = 300)
+# renderthis::to_pdf("index.Rmd")
+
+pagedown::chrome_print("index.html", timeout=600)
 ```
