@@ -942,6 +942,9 @@ class: center, middle
   * Take our data and take bootstrap samples (same data can be picked many times) 
   * Make decision tree from random number of variables (never all of them)
   * Next at the node take a random subset of variables again = **RANDOM**
+  * At the node best split of the random data is determined by 
+    * Gini - classification
+    * Mean Squared Error (average of squared residuals) - regression
   * Repeat!
 ]
 
